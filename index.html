@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Investify</title>
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <link href="./css/styles.css" rel="stylesheet" type='text/css' />
+  <link rel="icon" href="./img/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <div class="menu-btn">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="container">
+    <!-- --------------------- Nav ------------------- -->
+    <nav class="main-nav">
+      <div class="logo">
+        <img class="logo-img" src="./img/logo.png" alt="Investify">
+        <h3>INVESTIFY</h3>
+      </div>
+
+      <ul class="main-menu">
+        <li><a href="#">HOME</a></li>
+        <li><a href="dashboard.html">ABOUT US</a></li>
+        <li><a href="#">PLANS</a></li>
+        <li><a href="#">POLICY</a></li>
+        <li><a href="#">CONTACT</a></li>
+        <li class="list-none"><a href="login.html" target="_blank">SIGN IN</a></li>
+        <li class="list-none"><a href="register.html">REGISTER</a></li>
+      </ul>
+
+      <ul class="right-menu">
+        <a href="login.html" class="sign-in" target="_blank">
+          SIGN IN <i class="fas fa-chevron-right"></i>
+        </a>
+      </ul>
+    </nav>
+
+    <!-- ------------------- Showcase ---------------------- -->
+    <header class="showcase">
+      <div class="showcase-text">
+        <h3>INVEST IN YOUR FUTURE WITH CONFIDENCE</h3>
+      <h4>
+        Trust us to make your financial growth our priority. <br>
+      </h4>
+      </div>
+      <a href="register.html" target="_blank" class="btn">
+        Get Started <i class="fas fa-chevron-right"></i>
+      </a>
+    </header>
+
+
+    <!-- ---------------- About Us ----------------- -->
+    <div class="row reverse">
+      <div class="img-col">
+          <img src="./img/about.png" alt="">
+      </div>
+      <div class="text-col">
+        <div class="about-logo">
+          <img class="logo-img" src="./img/logo.png" alt="Investify">
+          <h1>INVESTIFY</h3>
+        </div>
+        <h3> Invest wisely, live richly.</h3>
+          <p>
+            At Investify, we help you achieve financial success in the
+            world of cryptocurrency and blockchain technology. Our 
+            experienced advisors provide personalized investment 
+            strategies tailored to your unique needs, whether you’re 
+            new to crypto or a seasoned investor. <br>
+            Your security is our top priority, with advanced encryption
+            and transparent practices ensuring you’re always informed 
+            about your investments. Join Investify to build a secure
+            financial future by strategically investing in digital assets.
+            Sign Up today to start your journey towards financial freedom.
+          </p>
+          <br>
+      </div>
+  </div>
+
+
+  <!-- -------------------Home cards 1---------------- -->
+    <section class="home-cards-container">
+      <h1>KICKSTART IN 4 EASY STEPS</h1>
+      <div class="home-cards">
+        <div class="home-cards-parts">
+          <div class="steps">
+            <img src="./img/account.png" alt="">
+          </div>
+          <h3>(1.) Create an Account</h3>
+          <p>
+            To sign up for a free account, simply click the
+            register button and fill out the corresponding form.
+          </p>
+        </div>
+        <div class="home-cards-parts">
+          <div class="steps">
+            <img src="./img/deposit.png" alt="">
+          </div>
+          <h3>(2.) Make a Deposit</h3>
+          <p>
+            Review our investment plans and choose the one which
+            fits your bugdet and profit which you want to have.
+          </p>
+        </div>
+        <div class="home-cards-parts">
+          <div class="steps">
+            <img src="./img/money.png" alt="">
+          </div>
+          <h3>(3.) Track Profit Growth</h3>
+          <p>
+            Watch your earnings accrue according to the earning
+            schedule of the plan that you have made deposit into.
+          </p>
+        </div>
+        <div class="home-cards-parts">
+          <div class="steps">
+            <img src="./img/atm.png" alt="">
+          </div>
+          <h3>(4.) Instant Payout</h3>
+          <p>
+            The payout service is available to all customers,
+            once payment request is initiated; withdrawal will
+            pay instantly.
+          </p>
+        </div>
+    </section>
+
+
+    <!-- -------------------Plans-------------------- -->
+    <div class="top">
+      <h1>PLANS & PRICING</h1>
+      <div class="toggle-btn">
+        <span style="margin: 0.8em;">Annually</span>
+        <label class="switch">
+          <input type="checkbox" id="checbox" onclick="check()" ; />
+          <span class="slider-two round"></span>
+        </label>
+        <span style="margin: 0.8em;">Monthly</span></div>
+    </div>
+
+    <div class="package-container">
+      <div class="packages">
+        <h1>Bronze</h1>
+        <img src="./img/bronze.png" alt="">
+        <h2 class="text1">&dollar;49.99</h2>
+        <h2 class="text2">&dollar;599.99</h2>
+        <ul class="list-two">
+          <li class="first">2000 Subscribers</li>
+          <li>12,000 Emails/month</li>
+          <li>Multi-User Accounts</li>
+          <li>24/7 Support</li>
+        </ul>
+        <a href="#" class="btn">
+          Get Started <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+      <div class="packages">
+        <h1>Silver</h1>
+        <img src="./img/silver.png" alt="">
+        <h2 class="text1">&dollar;999.99</h2>
+        <h2 class="text2">&dollar;11,999.99</h2>
+        <ul class="list-two">
+          <li class="first">Basic +</li>
+          <li>Landing Pages</li>
+          <li>Pop-up Forms</li>
+          <li>24/7 Support</li>
+        </ul>
+        <a href="#" class="btn">
+          Get Started <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+      <div class="packages">
+        <h1>Gold</h1>
+        <img src="./img/gold.png" alt="">
+        <h2 class="text1">&dollar;5,999.99</h2>
+        <h2 class="text2">&dollar;71,999.99</h2>
+        <ul class="list-two">
+          <li class="first">Professional +</li>
+          <li>Marketing Automation</li>
+          <li>Instagram Ads</li>
+          <li>24/7 Support</li>
+        </ul>
+        <a href="#" class="btn">
+          Get Started <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+      <div class="package-container" id="pkgSee">
+          <div class="packages">
+            <h1>Platinum</h1>
+            <img src="./img/plat.png" alt="">
+            <h2 class="text1">&dollar;9,999.99</h2>
+            <h2 class="text2">&dollar;119,999.99</h2>
+            <ul class="list-two">
+              <li class="first">2000 Subscribers</li>
+              <li>12,000 Emails/month</li>
+              <li>Multi-User Accounts</li>
+              <li>24/7 Support</li>
+            </ul>
+            <a href="#" class="btn">
+              Get Started <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+          <div class="packages">
+            <h1>Diamond</h1>
+            <img src="./img/diamond.png" alt="">
+            <h2 class="text1">&dollar;49,999.99</h2>
+            <h2 class="text2">&dollar;599,999.99</h2>
+            <ul class="list-two">
+              <li class="first">Basic +</li>
+              <li>Landing Pages</li>
+              <li>Pop-up Forms</li>
+              <li>24/7 Support</li>
+            </ul>
+            <a href="#" class="btn">
+              Get Started <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+          <div class="packages">
+            <h1>V.I.P</h1>
+            <img src="./img/vip.png" alt="">
+            <h2 class="text1">&dollar;99,999.99</h2>
+            <h2 class="text2">&dollar;1,199,999.99</h2>
+            <ul class="list-two">
+              <li class="first">Professional +</li>
+              <li>Marketing Automation</li>
+              <li>Instagram Ads</li>
+              <li>24/7 Support</li>
+            </ul>
+            <a href="#" class="btn">
+              Get Started <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+    </div>
+  </div>
+  <div class="see">
+    <a id="see-more" onclick="seeMore()">SEE MORE...</a>
+    <a id="see-less" onclick="seeLess()">SEE LESS...</a>
+  </div>
+
+    <!-- Xbox -->
+    <section class="xbox">
+      <div class="content">
+        <h2>Xbox Game Pass Ultimate</h2>
+        <p>Xbox Game Pass Ultimate Xbox Live Gold and over 100 high-quality
+          console and PC games. Play together with friends and discover your
+          next favorite game.</p>
+          <a href="#" class="btn">
+            Join Now <i class="fas fa-chevron-right"></i>
+          </a>
+      </div>
+    </div>
+
+    <!-- Home cards 2 -->
+			<section class="home-cards">
+				<div>
+					<img src="https://i.ibb.co/zVqhWn2/card5.png" alt="" />
+					<h3>Microsoft Teams</h3>
+					<p>
+						Unleash the power of your team.
+					</p>
+					<a href="#">Shop Now <i class="fas fa-chevron-right"></i></a>
+				</div>
+				<div>
+					<img src="https://i.ibb.co/mGZcxcn/card6.jpg" alt="" />
+					<h3>Unlock the power of learning</h3>
+					<p>
+						Get students future-ready with Windows 10 devices. Starting at $219.
+					</p>
+					<a href="#">Shop Now <i class="fas fa-chevron-right"></i></a>
+				</div>
+				<div>
+					<img src="https://i.ibb.co/NpPvVHj/card7.png" alt="" />
+					<h3>Windows 10 Enterprise</h3>
+					<p>
+						Download the free 90-day evaluation for IT professionals.
+					</p>
+					<a href="#">Download Now <i class="fas fa-chevron-right"></i></a>
+				</div>
+				<div>
+					<img src="https://i.ibb.co/LkP4L5T/card8.png" alt="" />
+					<h3>Explore Kubernetes</h3>
+					<p>
+						Learn how Kubernetes works and get started with cloud native app
+						development today.
+					</p>
+					<a href="#">Get Started <i class="fas fa-chevron-right"></i></a>
+				</div>
+      </section>
+      
+      <!-- ----------------------- Newsletter ---------------------- -->
+      <section class="newsletter">
+        <div class="newsletter-content">
+          <h2>OUR NEWSLETTER</h2>
+          <p>
+            Get expert tips, market analysis, and the latest financial news
+            delivered straight to your inbox by subscribing yo our newsletter.
+            Join our community of savvy investors today and take the first 
+            step towards smarter investing!
+          </p>
+          <div class="signup">
+            <h5></h5>
+            <form class="email-signup">
+                <input type="email" placeholder="Email" required>
+                <button type="submit"><h4>Send</h4> <i class="fa fa-angle-right"></i></button>
+            </form>
+        </div>
+        </div>
+      </section>
+
+      <!-- -----------------FAQ-------------------- -->
+<section class="accordion-sec">
+  <div class="accordion">
+    <h1>FREQUENTLY ASKED QUESTIONS</h1>
+
+    <div class="option">
+      <input type="checkbox" id="toggle1" class="toggle" />
+      <label class="title" for="toggle1">
+        How do I create an account?
+      </label>
+      <div class="content-acc">
+        <p>
+          To create an account, click on the "Sign Up" button, fill
+          in your details, and follow the instructions to verify 
+          your email address. Once account has been successfully created
+          click the login link to log in with the required credentials.
+        </p>
+      </div>
+    </div>
+
+    <div class="option">
+      <input type="checkbox" id="toggle2" class="toggle" />
+      <label class="title" for="toggle2">
+        How do I reset my password?
+      </label>
+      <div class="content-acc">
+        <p>
+          Click on the "Forgot Password" link on the login page, enter
+          your registered email address, and follow the instructions
+          sent to your email to reset your password.
+        </p>
+      </div>
+    </div>
+
+    <div class="option">
+      <input type="checkbox" id="toggle3" class="toggle" />
+      <label class="title" for="toggle3">
+        How do I withdraw my earnings?
+      </label>
+      <div class="content-acc">
+        <p>
+          To initiate a withdrawal, sign in to your account, select
+          your preferred cryptocurrency, insert your withdrawal wallet.
+          Submit your withdrawal request, and your transaction will be
+          automatically approved.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-two">
+    <div class="option">
+      <input type="checkbox" id="toggle4" class="toggle" />
+      <label class="title" for="toggle4">
+        I'm experiencing difficulties using this platform?
+      </label>
+      <div class="content-acc">
+        <p>
+          If experiencing any type of difficulty in using this platform, kindly visit the Contact section, fill out the form
+          correctly and submit. We will respond to your inquiry,
+          so please wait for a while.
+        </p>
+      </div>
+    </div>
+
+    <div class="option">
+      <input type="checkbox" id="toggle5" class="toggle" />
+      <label class="title" for="toggle5">
+        I am here to assist you
+      </label>
+      <div class="content-acc">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+      </div>
+    </div>
+
+    <div class="option">
+      <input type="checkbox" id="toggle6" class="toggle" />
+      <label class="title" for="toggle6">
+        I'm experiencing difficulties using this platform?
+      </label>
+      <div class="content-acc">
+        <p>
+          If experiencing any type of difficulty in using this platform, kindly visit the Contact section, fill out the form
+          correctly and submit. We will respond to your inquiry,
+          so please wait for a while.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+      <!-- --------------------------- Contact -------------------- -->
+      <section id="contact">
+        <div class="contain">
+            <h1>CONTACT US</h1>
+            <div class="flex">
+                <div id="form-container">
+                    <form>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" />
+
+                        <label for="email">Email</label>
+                        <input type="text" id="email" />
+
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" />
+
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Write your message here.."></textarea>
+
+                        <button class="btn">
+                          Send <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </form>
+                </div>
+                <div id="address-container">
+                  <div class="flex">
+                    <i class="fa-solid fa-location fa-2x"></i>
+                    <address>
+                      20377 Evergreen Terrace Mountain View, 
+                      California, USA 
+                    </address>
+                  </div>
+                  <div class="flex">
+                    <i class="fa-solid fa-phone fa-2x"></i>
+                    <a href="#">232-232-2323</a>
+                  </div>
+                  <div class="flex">
+                    <i class="fa-solid fa-envelope fa-2x"></i>
+                    <a href="#">ouremail@domain.com</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+      <!-- -------------- Footer ------------------ -->
+      <footer>
+        <div class="footer flex contain">
+            <div class="footer-about">
+              <div class="foot-logo-wrapper">
+                <img class="logo-img" src="./img/logo.png" alt="Investify">
+                <h3>INVESTIFY</h3>
+              </div>
+                <p>
+                  We stand out as a platform and goes further through 
+                  fundamental advancements in technology specifically 
+                  taking advantage of the cryptocurrency technology and
+                  forex market and the direction of cryptocurrency 
+                  advancement.
+                </p>
+            </div>
+            <div class="footer-quick-links">
+                <h5>QUICK LINKS</h5>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Sign In</a></li>
+                    <li><a href="#">Plans</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-quick-links">
+              <h5>DOCUMENTS</h5>
+              <ul>
+                  <li><a href="#">Company Details</a></li>
+                  <li><a href="#">Company House Certificate</a></li>
+                  <li><a href="#">Testimonials</a></li>
+                  <li><a href="#">Digital Currency</a></li>
+              </ul>
+          </div>
+        </div>
+        <small>
+            copyright &copy; 2011 - 2024 Investify Traders Limited. All rights reserved
+        </small>
+    </footer>
+
+
+  <script src="./js/app.js"></script>
+</body>
+
+</html>
