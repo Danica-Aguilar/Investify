@@ -306,20 +306,29 @@ body {
 .topbar {
   width: 100%;
   height: 60px;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.topbar div:first-child {
+  width: 22px;
+  height: 18px;
+}
+
 .toggle {
-  position: relative;
-  width: 60px;
-  height: 60px;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: var(--pry-color);
+  z-index: 2000;
+}
+
+.toggle img {
+  width: 25px;
+  height: 20px;
 }
 
 .icon img {
@@ -328,9 +337,7 @@ body {
 }
 
 .settings {
-  position: relative;
   cursor: pointer;
-  margin-right: 10px;
 }
 
 /* ======================= Cards ====================== */
@@ -579,14 +586,14 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: var(--pry-color);
-  border: 3px solid var(--white);
+  background-color: var(--white);
+  border: 1px solid var(--pry-color);
   border-radius: 10px;
   display: none;
   z-index: 1000;
   text-align: center;
   width: 300px;
-  color: var(--white);
+  color: var(--pry-color);
 }
 
 #popup.show,
@@ -687,6 +694,9 @@ body {
     position: fixed;
     right: 0;
     left: initial;
+    margin-top: .8rem;
+    margin-right: 1rem;
+    z-index: 10001;
   }
 
   .main.active {
