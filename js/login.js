@@ -47,7 +47,7 @@ submit.addEventListener("click", function (event) {
       setTimeout(() => {
         document.getElementById("popup-error").style.display = "none";
         window.location.href = "login.html"; // Redirect to login page
-      }, 2000); // 3-seconds timeout
+      }, 5000); // 5-seconds timeout
     });
 });
 

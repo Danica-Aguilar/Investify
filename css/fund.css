@@ -523,7 +523,7 @@ body {
     position: fixed;
     right: 0;
     left: initial;
-    margin-top: .8rem;
+    margin-top: -.8rem;
     margin-right: 1rem;
     z-index: 10001;
   }
