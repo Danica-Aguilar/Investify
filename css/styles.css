@@ -23,6 +23,13 @@ a {
   font-weight: bold;
 }
 
+h1 {
+  text-decoration: underline;
+  text-align: center;
+  margin: 8rem 0 1.7rem 0;
+  font-size: 1.4rem;
+}
+
 ul {
   list-style: none;
 }
@@ -200,6 +207,7 @@ ul {
     justify-content: center;
     flex-direction: column;
   }
+
   .reverse {
     flex-direction: column-reverse;
   }
@@ -219,7 +227,8 @@ ul {
 
 .text-col p {
   text-align: left;
-  font-size: 1rem;
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
 }
 
 .img-col {
@@ -234,8 +243,8 @@ ul {
   margin: auto;
 }
 
-.text-col h1 {
-  font-size: 1.6rem;
+.text-col h2 {
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1.3rem;
   text-align: center;
@@ -248,17 +257,10 @@ ul {
 }
 
 /* ---------------- Home cards ----------------- */
-.home-cards-container h1 {
-  text-align: center;
-  margin: 0rem 0 1.7rem 0;
-  font-size: 1.4rem;
-}
-
 .home-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
-  margin-bottom: 40px;
   padding: 0 1rem 0 1rem;
 }
 
@@ -274,8 +276,10 @@ ul {
 }
 
 .home-cards h3 {
-  margin-top: 10px;
+  margin-top: 0.6rem;
   margin-bottom: 5px;
+  text-transform: uppercase;
+  font-size: 1rem;
 }
 
 .home-cards a {
@@ -284,10 +288,17 @@ ul {
   color: var(--pry-color);
   text-transform: uppercase;
   font-weight: bold;
+  margin-bottom: 3rem;
 }
 
 .home-cards a:hover i {
   margin-left: 10px;
+  transition: 0.5s;
+}
+
+.home-cards-parts p {
+  font-size: 1.1rem;
+  margin: 0 0.7rem;
 }
 
 .steps {
@@ -302,20 +313,18 @@ ul {
 }
 
 .steps img {
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  max-width: 45px;
+  height: 45px;
+  max-height: 45px;
 }
+
 
 /* -------------------- Plan section --------------------- */
 .top {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 7rem;
-}
-
-.top h1 {
-  font-size: 1.4rem;
 }
 
 .packages {
@@ -338,7 +347,7 @@ ul {
   height: 3.6rem;
 }
 
-h1,
+h3,
 h2 {
   font-size: 1.2em;
 }
@@ -355,6 +364,9 @@ h2 {
 .first {
   margin-top: 40px;
   border-top: 1px solid var(--pry-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.7rem;
 }
 
 .list-two {
@@ -411,7 +423,7 @@ label {
   transition: 0.4s;
 }
 
-input:checked + .slider-two:before {
+input:checked+.slider-two:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -456,8 +468,7 @@ input:checked + .slider-two:before {
 .xbox {
   width: 100%;
   height: 500px;
-  background: url("https://i.ibb.co/tBJGPD9/xbox.png") no-repeat center
-    center/cover;
+  background: url("https://i.ibb.co/tBJGPD9/xbox.png") no-repeat center center/cover;
   margin-top: 5rem;
   margin-bottom: 20px;
 }
@@ -541,16 +552,12 @@ nav div button:hover:nth-child(2) {
 
 /* ----------------------FAQ----------------- */
 .accordion-sec {
-  margin: 8em auto 5em auto;
+  margin: 0 auto;
   max-width: 35em;
 }
 
 .accordion-two {
   margin: 0 auto;
-}
-
-.accordion h1 {
-  text-align: center;
 }
 
 .toggle {
@@ -576,7 +583,8 @@ nav div button:hover:nth-child(2) {
   display: block;
   cursor: pointer;
   box-shadow: 0 0 20px -8px #b5bdb5;
-  color: #000; /* Use a specific color instead of $font-color */
+  color: #000;
+  /* Use a specific color instead of $font-color */
   font-weight: bold;
 }
 
@@ -609,15 +617,15 @@ nav div button:hover:nth-child(2) {
   line-height: 1.5;
 }
 
-.toggle:checked + .title + .content-acc {
+.toggle:checked+.title+.content-acc {
   max-height: 500px;
 }
 
-.toggle:checked + .title {
+.toggle:checked+.title {
   box-shadow: 0 0 20px -8px #b5bdb5;
 }
 
-.toggle:checked + .title::before {
+.toggle:checked+.title::before {
   transform: rotate(90deg) !important;
 }
 
@@ -625,18 +633,12 @@ nav div button:hover:nth-child(2) {
 /* ----------------- Contact ----------------- */
 #contact {
   background: #fff;
-  padding: 4rem 0 8rem;
+  margin-bottom: 3rem;
 }
 
 .flex {
   display: flex;
   justify-content: space-between;
-}
-
-#contact h1 {
-  font-size: 1.4rem;
-  text-align: center;
-  margin: 5rem 0 1rem 0;
 }
 
 #form-container {
@@ -735,6 +737,7 @@ nav div button:hover:nth-child(2) {
   .contain {
     max-width: 540px;
   }
+
   #contact .flex {
     flex-wrap: wrap;
   }
@@ -839,6 +842,7 @@ footer .footer-quick-links ul li a:hover {
 }
 
 footer small {
+  margin: 3rem 1rem 0 1rem;
   margin-top: 3rem;
   font-size: 0.8rem;
   display: block;
@@ -861,6 +865,7 @@ footer small a:hover {
   .contain {
     max-width: 540px;
   }
+
   #form-container {
     width: 100%;
     padding: 2rem;
@@ -879,12 +884,12 @@ footer small a:hover {
     flex-wrap: wrap;
   }
 
-  footer .flex > div {
+  footer .flex>div {
     width: 100%;
     margin-top: 1rem;
   }
 
-  footer .flex > div:first-child {
+  footer .flex>div:first-child {
     margin-top: 0;
   }
 
@@ -909,11 +914,11 @@ footer small a:hover {
     display: block;
     right: 2.5%;
     z-index: 100;
-    font-size: 1.6em;
+    font-size: 1.2em;
   }
 
   .sign-in {
-    margin-right: -1rem;
+    padding-right: -1rem;
   }
 
   .main-nav ul.right-menu {
@@ -995,8 +1000,8 @@ footer small a:hover {
 
   .sign-in {
     padding: 2px;
-    font-size: 0.8em;
     margin-right: -0.9rem;
+    font-size: 0.8rem;
   }
 
   #form-container {
@@ -1013,7 +1018,8 @@ footer small a:hover {
   * {
     font-size: small;
   }
-  .menu-btn {
-    font-size: large;
+
+  h1 {
+    font-size: 1.2rem;
   }
 }

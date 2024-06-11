@@ -38,24 +38,3 @@ function seeLess() {
   seeless.style.display = "none";
   seemore.style.display = "block";
 }
-
-/* ---------------------FAQ------------------- */
-function addRevealEffect(elements) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal');
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  elements.forEach((element) => {
-    observer.observe(element);
-  });
-}
-
-const elementsToReveal = document.querySelectorAll('.card:not(.hero)');
-addRevealEffect(elementsToReveal);
