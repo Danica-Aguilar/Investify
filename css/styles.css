@@ -296,8 +296,7 @@ ul {
 }
 
 .home-cards-parts p {
-  font-size: 1.1rem;
-  margin: 0 0.7rem;
+  margin: 0 1.5rem;
 }
 
 .steps {
@@ -312,10 +311,10 @@ ul {
 }
 
 .steps img {
-  width: 45px;
-  max-width: 45px;
-  height: 45px;
-  max-height: 45px;
+  width: 40px;
+  max-width: 40px;
+  height: 55px;
+  max-height: 55px;
 }
 
 
