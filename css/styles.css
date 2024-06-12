@@ -297,6 +297,13 @@ ul {
 
 .home-cards-parts p {
   margin: 0 1.5rem;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 481px) {
+  .home-cards-parts p {
+    font-size: small;
+  }
 }
 
 .steps {
