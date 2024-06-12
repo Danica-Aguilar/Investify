@@ -245,6 +245,11 @@ body {
   font-size: 1.2rem;
 }
 
+.navigation ul li a .icon img {
+  margin-top: 1.5rem;
+  width: 1.2rem;
+}
+
 .navigation ul li a .title {
   position: relative;
   display: block;
@@ -338,6 +343,16 @@ body {
 
 .settings {
   cursor: pointer;
+}
+
+.settings a {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .settings a {
+    font-size: 1.2rem;
+  }
 }
 
 /* ======================= Cards ====================== */
@@ -668,8 +683,6 @@ body {
     grid-template-columns: repeat(1, 1fr);
   }
 
-  
-
   .user {
     min-width: 40px;
   }
@@ -694,7 +707,7 @@ body {
     position: fixed;
     right: 0;
     left: initial;
-    margin-top: -.8rem;
+    margin-top: -.1rem;
     margin-right: 1rem;
     z-index: 10001;
   }
@@ -707,12 +720,8 @@ body {
   #confirmationPopup {
     width: 250px;
   }
-}
 
-
-
-@media (max-width: 481px) {
-  * {
+  p, h1, h2, h3, h4, h5 {
     font-size: small;
   }
 }
