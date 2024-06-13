@@ -493,6 +493,15 @@ input[type="checkbox"]:checked+.slider-two:before {
     color: var(--pry-color);
     transition: border 0.2s ease-out;
     cursor: pointer;
+    border: 1px solid transparent;
+
+    &:hover {
+        border: 1px solid var(--pry-color);
+        transition: 0.5s;
+      }
+    &:checked {
+        border: 2px solid var(--pry-color);   
+    }
 }
 
 .radio {
@@ -684,7 +693,9 @@ input[type="checkbox"]:checked+.slider-two:before {
     h5,
     table,
     a,
-    label {
+    label,
+    ul,
+    li {
         font-size: small;
     }
 }

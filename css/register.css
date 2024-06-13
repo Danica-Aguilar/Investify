@@ -79,6 +79,10 @@ body {
   color: var(--pry-color);
 }
 
+#form p {
+  text-align: center;
+}
+
 .input-control {
   display: flex;
   flex-direction: column;
