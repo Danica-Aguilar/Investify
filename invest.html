@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fund Wallet</title>
+    <title>Invest</title>
 
     <!-- ======= Styles ====== -->
     <link rel="icon" href="./img/logo.png">
-    <link rel="stylesheet" href="./css/fund.css" />
+    <link rel="stylesheet" href="./css/invest.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -19,7 +19,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
-    <script type="module" src="./js/fund.js"></script>
+    <script type="module" src="./js/invest.js"></script>
 </head>
 
 <body>
@@ -60,7 +60,7 @@
                 </li>
 
                 <li>
-                    <a href="invest.html">
+                    <a href="#">
                         <span class="icon">
                             📈
                         </span>
@@ -127,24 +127,96 @@
                 </div>
             </div>
 
-            <!-- ================= Fund Wallet Section =============== -->
-            <div class="deposit-container" id="fund" style="display: none;">
-                <h2>Fund Wallet</h2>
-                <form id="depositForm">
-                    <label for="crypto">Select Cryptocurrency:</label>
-                    <select id="crypto" name="crypto">
-                        <option value="bitcoin">Bitcoin (BTC)</option>
-                        <option value="ethereum">Ethereum (ETH)</option>
-                        <option value="litecoin">Litecoin (LTC)</option>
-                        <option value="ripple">Ripple (XRP)</option>
-                    </select>
+            <!-- ================= Inestment Section =============== -->
+            <section class="invest">
+                <div class="top">
+                    <h2>CHOOSE INVESTMENT PLAN</h2>
+                    <div class="toggle-btn">
+                        <span style="margin: 0.8em; font-weight: bold;">Min $</span>
+                        <label class="switch">
+                            <input type="checkbox" id="checbox" onclick="check()" ; />
+                            <span class="slider-two round"></span>
+                        </label>
+                        <span style="margin: 0.8em; font-weight: bold">Max $</span>
+                    </div>
+                </div>
 
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" name="amount" placeholder="Enter amount">
+                <div class="package-container">
+                    <div class="packages">
+                        <h3>Bronze</h3>
+                        <img src="./img/bronze.png" alt="">
+                        <h2 class="text1">&dollar;499</h2>
+                        <h2 class="text2">&dollar;50</h2>
+                        <ul class="list-two">
+                            <li class="first">10% After 24 Hours</li>
+                            <li>Instant Payout & Withdrawal</li>
+                            <li>24/7 Support</li>
+                        </ul>
+                        <input type="radio">
+                    </div>
+                    <div class="packages">
+                        <h3>Silver</h3>
+                        <img src="./img/silver.png" alt="">
+                        <h2 class="text1">&dollar;999</h2>
+                        <h2 class="text2">&dollar;500</h2>
+                        <ul class="list-two">
+                            <li class="first">12% After 24 Hours</li>
+                            <li>Instant Payout & Withdrawal</li>
+                            <li>24/7 Support</li>
+                        </ul>
+                    </div>
+                    <div class="packages">
+                        <h3>Gold</h3>
+                        <img src="./img/gold.png" alt="">
+                        <h2 class="text1">&dollar;4,999</h2>
+                        <h2 class="text2">&dollar;1,000</h2>
+                        <ul class="list-two">
+                            <li class="first">50% After 24 Hours</li>
+                            <li>Instant Payout & Withdrawal</li>
+                            <li>24/7 Support</li>
+                        </ul>
+                    </div>
+                    <div class="package-container" id="pkgSee">
+                        <div class="packages">
+                            <h3>Platinum</h3>
+                            <img src="./img/plat.png" alt="">
+                            <h2 class="text1">&dollar;9,999</h2>
+                            <h2 class="text2">&dollar;5,000</h2>
+                            <ul class="list-two">
+                                <li class="first">70% After 48 Hours</li>
+                                <li>Instant Payout & Withdrawal</li>
+                                <li>24/7 Support</li>
+                            </ul>
+                        </div>
+                        <div class="packages">
+                            <h3>Diamond</h3>
+                            <img src="./img/diamond.png" alt="">
+                            <h2 class="text1">&dollar;19,999</h2>
+                            <h2 class="text2">&dollar;10,000</h2>
+                            <ul class="list-two">
+                                <li class="first">100% After 72 Hours</li>
+                                <li>Instant Payout & Withdrawal</li>
+                                <li>20% Refferal Bonus</li>
+                                <li>24/7 Support</li>
+                            </ul>
+                        </div>
+                        <div class="packages">
+                            <h3>V.I.P</h3>
+                            <img src="./img/vip.png" alt="">
+                            <h2 class="text1">&dollar;Unlimited</h2>
+                            <h2 class="text2">&dollar;20,000</h2>
+                            <ul class="list-two">
+                                <li class="first">150% After 96 Hours</li>
+                                <li>Instant Payout & Withdrawal</li>
+                                <li>Exclusive Servers</li>
+                                <li>24/7 Support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                    <button type="submit">Deposit</button>
-                </form>
-            </div>
+
         </div>
     </div>
 
@@ -163,31 +235,8 @@
 
     <!-- =================== Scripts =====================  -->
     <script>
-        // ============= Crypto wallets ================== //
-        document.getElementById('depositForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            const crypto = document.getElementById('crypto').value;
-            let url = '';
+        // ============= Investment plans ================== //
 
-            switch (crypto) {
-                case 'bitcoin':
-                    url = 'login.html'; // Replace with the actual URL for Bitcoin
-                    break;
-                case 'ethereum':
-                    url = 'ethereum.html'; // Replace with the actual URL for Ethereum
-                    break;
-                case 'litecoin':
-                    url = 'litecoin.html'; // Replace with the actual URL for Litecoin
-                    break;
-                case 'ripple':
-                    url = 'ripple.html'; // Replace with the actual URL for Ripple
-                    break;
-                default:
-                    url = 'default.html'; // Replace with the default URL
-            }
-
-            window.location.href = url;
-        });
 
         // ==================== Menu Toggle ===================== //
         let toggle = document.querySelector(".toggle");

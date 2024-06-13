@@ -17,13 +17,18 @@ img i {
   -webkit-tap-highlight-color: transparent;
 }
 
-i, img, a {
+i,
+img,
+a {
   outline: none;
 }
 
-.i:focus, img:focus, a:focus {
+.i:focus,
+img:focus,
+a:focus {
   outline: none;
-  box-shadow: none; /* For additional safety */
+  box-shadow: none;
+  /* For additional safety */
 }
 
 
@@ -255,6 +260,11 @@ body {
   font-size: 1.2rem;
 }
 
+.navigation ul li a .icon img {
+  margin-top: 1.5rem;
+  width: 1.2rem;
+}
+
 .navigation ul li a .title {
   position: relative;
   display: block;
@@ -346,8 +356,14 @@ body {
   height: 20px;
 }
 
-.settings {
-  cursor: pointer;
+.settings a {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 480px) {
+  .settings a {
+    font-size: 1.1rem;
+  }
 }
 
 /* ==================== Fund Wallet Sec =================== */
@@ -496,9 +512,7 @@ body {
   .cardBox {
     grid-template-columns: repeat(1, 1fr);
   }
-
   
-
   .user {
     min-width: 40px;
   }
@@ -523,7 +537,7 @@ body {
     position: fixed;
     right: 0;
     left: initial;
-    margin-top: -.8rem;
+    margin-top: -.1rem;
     margin-right: 1rem;
     z-index: 10001;
   }
@@ -536,12 +550,16 @@ body {
   #confirmationPopup {
     width: 250px;
   }
-}
 
-
-
-@media (max-width: 481px) {
-  * {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  table,
+  a,
+  label {
     font-size: small;
   }
 }
