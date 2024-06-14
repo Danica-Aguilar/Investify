@@ -201,7 +201,7 @@ body {
 }
 
 .navigation.active {
-    width: 60px;
+    width: 80px;
 }
 
 .navigation ul {
@@ -375,8 +375,6 @@ body {
     align-items: center;
 }
 
-
-
 .packages img {
     width: 4rem;
     height: 3.6rem;
@@ -472,6 +470,13 @@ input[type="checkbox"]:checked+.slider-two:before {
     border-radius: 50%;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
 .package-container {
     display: flex;
     align-items: center;
@@ -500,9 +505,10 @@ input[type="checkbox"]:checked+.slider-two:before {
     &:hover {
         border: 1px solid var(--pry-color);
         transition: 0.5s;
-      }
+    }
+
     &:checked {
-        border: 2px solid var(--pry-color);   
+        border: 2px solid var(--pry-color);
     }
 }
 
@@ -555,6 +561,29 @@ input[type="checkbox"]:checked+.slider-two:before {
             border-color: var(--pry-color);
         }
     }
+}
+
+
+button {
+    position: relative;
+    padding: 10px;
+    background-color: var(--pry-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.5s;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+button:hover {
+    background-color: #2d7528;
+    transition: all 0.5s;
 }
 
 
