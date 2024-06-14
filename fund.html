@@ -128,15 +128,20 @@
             </div>
 
             <!-- ================= Fund Wallet Section =============== -->
+            <P class="deposit-description">
+                Choose the cryptocurrency option suitable for you, make your deposit
+                and send proof of payment with details to: info@investify.net
+                or support@investify.net
+            </P>
             <div class="deposit-container" id="fund" style="display: none;">
-                <h2>Fund Wallet</h2>
+                <h2>FUND WALLET</h2>
                 <form id="depositForm">
                     <label for="crypto">Select Cryptocurrency:</label>
                     <select id="crypto" name="crypto">
+                        <option value="" disabled>Select</option>
                         <option value="bitcoin">Bitcoin (BTC)</option>
                         <option value="ethereum">Ethereum (ETH)</option>
-                        <option value="litecoin">Litecoin (LTC)</option>
-                        <option value="ripple">Ripple (XRP)</option>
+                        <option value="tether">Tether (USDT)</option>
                     </select>
 
                     <label for="amount">Amount:</label>
@@ -145,20 +150,29 @@
                     <button type="submit">Deposit</button>
                 </form>
             </div>
+            <div class="btc">
+                <h3>Bitcoin Address</h3>
+                <!--<img src="./img/vip.png" alt=""> -->
+                <div class="container">
+                    <span id="text-to-copy">This is the text to be copied.</span>
+                    <button id="copy-button">Copy</button>
+                    <span id="copy-prompt" class="hidden">Copied!</span>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- ========================== Popups ====================== -->
-    <div id="confirmationPopup" class="popup">
-        <span id="confirmationMessage">Are you sure you want to log out?</span>
-        <div>
-            <button id="confirmYes" class="confirm-button">Yes</button>
-            <button id="confirmNo" class="confirm-button">No</button>
+        <!-- ========================== Popups ====================== -->
+        <div id="confirmationPopup" class="popup">
+            <span id="confirmationMessage">Are you sure you want to log out?</span>
+            <div>
+                <button id="confirmYes" class="confirm-button">Yes</button>
+                <button id="confirmNo" class="confirm-button">No</button>
+            </div>
         </div>
-    </div>
-    <div id="popup" class="popup">
-        <span id="popup-message"></span>
-        <span class="close-popup">&times;</span>
+        <div id="popup" class="popup">
+            <span id="popup-message"></span>
+            <span class="close-popup">&times;</span>
+        </div>
     </div>
 
     <!-- =================== Scripts =====================  -->
@@ -171,16 +185,13 @@
 
             switch (crypto) {
                 case 'bitcoin':
-                    url = 'login.html'; // Replace with the actual URL for Bitcoin
+                    url = 'btc.html'; // Replace with the actual URL for Bitcoin
                     break;
                 case 'ethereum':
-                    url = 'ethereum.html'; // Replace with the actual URL for Ethereum
+                    url = 'eth.html'; // Replace with the actual URL for Ethereum
                     break;
-                case 'litecoin':
-                    url = 'litecoin.html'; // Replace with the actual URL for Litecoin
-                    break;
-                case 'ripple':
-                    url = 'ripple.html'; // Replace with the actual URL for Ripple
+                case 'tether':
+                    url = 'usdt.html'; // Replace with the actual URL for Litecoin
                     break;
                 default:
                     url = 'default.html'; // Replace with the default URL
@@ -198,6 +209,34 @@
             navigation.classList.toggle("active");
             main.classList.toggle("active");
         };
+
+        // ================== Copy details ============= //
+        document.getElementById('copy-button').addEventListener('click', function () {
+            // Get the text to copy
+            const textToCopy = document.getElementById('text-to-copy').innerText;
+
+            // Create a temporary textarea element to hold the text
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            document.body.appendChild(textarea);
+
+            // Select the text and copy it to the clipboard
+            textarea.select();
+            document.execCommand('copy');
+
+            // Remove the temporary textarea element
+            document.body.removeChild(textarea);
+
+            // Show the "Copied!" prompt
+            const copyPrompt = document.getElementById('copy-prompt');
+            copyPrompt.classList.remove('hidden');
+
+            // Hide the prompt after 2 seconds
+            setTimeout(function () {
+                copyPrompt.classList.add('hidden');
+            }, 2000);
+        });
+
 
         // ========== Close popup when clicking outside of it ========== //
         window.onclick = function (event) {

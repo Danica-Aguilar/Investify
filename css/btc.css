@@ -18,21 +18,6 @@ img i {
   -webkit-tap-highlight-color: transparent;
 }
 
-i,
-img,
-a {
-  outline: none;
-}
-
-.i:focus,
-img:focus,
-a:focus {
-  outline: none;
-  box-shadow: none;
-  /* For additional safety */
-}
-
-
 a {
   text-decoration: none;
 }
@@ -49,7 +34,6 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   font-family: "Poppins";
-  color: var(--pry-color);
 }
 
 .container {
@@ -220,8 +204,7 @@ body {
   border-bottom-left-radius: 30px;
 }
 
-.navigation ul li:hover,
-.navigation ul li.hovered {
+.navigation ul li:hover {
   background-color: var(--white);
 }
 
@@ -239,8 +222,7 @@ body {
   color: var(--pry-color);
 }
 
-.navigation ul li:hover a,
-.navigation ul li.hovered a {
+.navigation ul li:hover a {
   color: var(--pry-color);
 }
 
@@ -279,8 +261,7 @@ body {
 }
 
 /* --------- curve outside ---------- */
-.navigation ul li:hover a::before,
-.navigation ul li.hovered a::before {
+.navigation ul li:hover a::before {
   content: "";
   position: absolute;
   right: 0;
@@ -293,8 +274,7 @@ body {
   pointer-events: none;
 }
 
-.navigation ul li:hover a::after,
-.navigation ul li.hovered a::after {
+.navigation ul li:hover a::after {
   content: "";
   position: absolute;
   right: 0;
@@ -359,127 +339,21 @@ body {
   height: 20px;
 }
 
+.settings {
+  cursor: pointer;
+}
+
 .settings a {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 @media (max-width: 480px) {
   .settings a {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 }
 
-/* ==================== Fund Wallet Sec =================== */
-.deposit-description {
-  font-weight: 400;
-  text-align: center;
-  padding: 1rem;
-  color: var(--pry-color);
-}
-
-.deposit-container {
-  display: none;
-  background: #fff;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  width: 90%;
-  margin-top: 5rem;
-}
-
-.deposit-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: var(--pry-color);
-}
-
-.deposit-container form {
-  display: flex;
-  flex-direction: column;
-}
-
-.deposit-container label {
-  margin-bottom: 8px;
-  color: var(--pry-color);
-}
-
-.deposit-container select,
-.deposit-container input[type="number"] {
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  color: var(--pry-color);
-}
-
-.deposit-container button {
-  padding: 10px;
-  background-color: #133917;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.deposit-container button:hover {
-  background-color: #0a2910;
-}
-
-@media (max-width: 600px) {
-  .deposit-container {
-    padding: 15px;
-  }
-}
-
-
-/* ======================== Btc Details ======================= */
-.btc {
-  margin: 20px;
-  width: 280px;
-  padding: 1em;
-  height: 100%;
-  background: var(--bg-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 0 20px -8px #b5bdb5;
-  flex-wrap: wrap;
-  color: var(--pry-color);
-  transition: border 0.2s ease-out;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-#copy-button {
-  padding: 10px 20px;
-  cursor: pointer;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-#copy-button:hover {
-  background-color: #0056b3;
-}
-
-#copy-prompt {
-  margin-left: 10px;
-  color: green;
-  font-weight: bold;
-}
-
-.hidden {
-  display: none;
-}
+/* ======================= Cards ====================== */
 
 
 
@@ -552,27 +426,9 @@ body {
   .main.active {
     left: 200px;
   }
-
-  .cardBox {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .details {
-    grid-template-columns: 1fr;
-  }
-
-  .recentOrders {
-    overflow-x: auto;
-  }
 }
 
 @media (max-width: 480px) {
-  .cardBox {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  
   .user {
     min-width: 40px;
   }
@@ -618,8 +474,7 @@ body {
   h4,
   h5,
   table,
-  a,
-  label {
+  a {
     font-size: small;
   }
 }
