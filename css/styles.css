@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Poppins";
   background: #fff;
   color: var(--pry-color);
   font-size: 15px;
@@ -24,10 +26,11 @@ a {
 }
 
 h1 {
-  text-decoration: underline;
   text-align: center;
-  margin: 8rem 0 1.7rem 0;
+  margin: 4rem 2rem 1.7rem 2rem;
   font-size: 1.4rem;
+  border-left: 5px solid var(--pry-color);
+  border-right: 5px solid var(--pry-color);
 }
 
 ul {
@@ -92,6 +95,7 @@ ul {
 
 .logo h3 {
   font-size: 1.5em;
+  font-weight: bolder;
 }
 
 .logo-img {
@@ -102,6 +106,7 @@ ul {
 @media (max-width: 500px) {
   .main-nav .logo h3 {
     font-size: 1.3em;
+    font-weight: bold;
   }
 
   .main-nav .logo img {
@@ -199,7 +204,7 @@ ul {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin: 3rem 0 1.7rem 0;
+  margin: 4rem 0 1.7rem 0;
   gap: 1rem;
   text-align: center;
 }
@@ -224,7 +229,6 @@ ul {
 .text-col,
 .img-col {
   flex-basis: 50%;
-  margin-bottom: 3rem;
 }
 
 .text-col p {
@@ -247,7 +251,7 @@ ul {
 
 .text-col h2 {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: bold;
   margin-bottom: 1.3rem;
   text-align: center;
 }
@@ -270,6 +274,7 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .home-cards img {
@@ -330,9 +335,14 @@ ul {
 
 
 /* -------------------- Plan section --------------------- */
-.top {
+.top, .toggle-btn {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.toggle-btn {
+  flex-direction: row;
   align-items: center;
 }
 
@@ -597,7 +607,6 @@ nav div button:hover:nth-child(2) {
   display: block;
   cursor: pointer;
   box-shadow: 0 0 20px -8px #b5bdb5;
-  color: #000;
   /* Use a specific color instead of $font-color */
   font-weight: bold;
 }
@@ -645,8 +654,13 @@ nav div button:hover:nth-child(2) {
 
 
 /* ----------------- Contact ----------------- */
-#contact {
+.contain {
+  margin-top: 4rem;
+}
+
+.contact {
   background: #fff;
+  margin-top: 5rem;
   margin-bottom: 3rem;
 }
 
@@ -752,7 +766,7 @@ nav div button:hover:nth-child(2) {
     max-width: 540px;
   }
 
-  #contact .flex {
+  .contact .flex {
     flex-wrap: wrap;
   }
 
@@ -768,11 +782,8 @@ nav div button:hover:nth-child(2) {
 }
 
 @media (max-width: 500px) {
-  #contact {
-    padding: 4rem 0;
-  }
 
-  #contact h2 {
+  .contact h2 {
     margin-bottom: 2rem;
   }
 
