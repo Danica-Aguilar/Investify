@@ -686,6 +686,7 @@ button:hover {
         width: 100%;
         left: -100%;
         z-index: 1000;
+        transition: 0.1s;
     }
 
     .navigation.active {

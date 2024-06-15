@@ -435,7 +435,7 @@ body {
 /* ======================== Btc Details ======================= */
 .crypto-display {
   margin-top: 3rem;
-  width: 80%;
+  width: 90%;
   padding: 1em;
   height: 100%;
   background: var(--bg-color);
@@ -461,18 +461,21 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  width: 90%;
 }
 
 #text-to-copy {
   border: 1px solid var(--pry-color);
   height: 35px;
-  max-width: 250px;
   overflow-y: hidden;
   overflow-x: scroll;
   scrollbar-width: thin;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 
 #copy-button {
@@ -481,7 +484,7 @@ body {
   cursor: pointer;
   background-color: var(--pry-color);
   color: var(--white);
-  border: none;
+  border: 1px solid var(--pry-color);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   font-size: 16px;
@@ -571,6 +574,7 @@ body {
   .main {
     width: 100%;
     left: 0;
+    transition: 0s;
   }
 
   .main.active {
@@ -604,6 +608,7 @@ body {
   .navigation {
     width: 100%;
     left: -100%;
+    transition: 0.1s;
     z-index: 1000;
   }
 
