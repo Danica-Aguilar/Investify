@@ -133,34 +133,68 @@
                 and send proof of payment with details to: info@investify.net
                 or support@investify.net
             </P>
-            <div class="deposit-container" id="fund" style="display: none;">
+            <div class="deposit-container" id="fund">
                 <h2>FUND WALLET</h2>
                 <form id="depositForm">
                     <label for="crypto">Select Cryptocurrency:</label>
                     <select id="crypto" name="crypto">
-                        <option value="" disabled>Select</option>
                         <option value="bitcoin">Bitcoin (BTC)</option>
                         <option value="ethereum">Ethereum (ETH)</option>
                         <option value="tether">Tether (USDT)</option>
                     </select>
 
                     <label for="amount">Amount:</label>
-                    <input type="number" id="amount" name="amount" placeholder="Enter amount">
+                    <input type="number" id="amount" min="50" name="amount" required>
 
                     <button type="submit">Deposit</button>
                 </form>
             </div>
-            <div class="btc">
-                <h3>Bitcoin Address</h3>
-                <!--<img src="./img/vip.png" alt=""> -->
-                <div class="container">
-                    <span id="text-to-copy">This is the text to be copied.</span>
+            <div class="crypto-display" id="bitcoin">
+                <h2>₿ITCOIN ADDRESS</h2>
+                <img src="./img/qr.png" alt="">
+                <p id="fund-amount">$500</p>
+                <p class="fund-description">
+                    Kindly copy the address below and send the exact worth of 
+                    bitcoin to the copied address.
+                </p>
+                <div class="crypto-container">
+                    <p id="text-to-copy">bc1qlvcnxnfe36rmvf9exux39f9et3tn82hul5tfe9</p>
+                    <button id="copy-button">Copy</button>
+                    <span id="copy-prompt" class="hidden">Copied!</span>
+                </div>
+            </div>
+
+            <div class="crypto-display" id="ethereum">
+                <h2>♦️ETHEREUM ADDRESS</h2>
+                <img src="./img/qr.png" alt="">
+                <p id="fund-amount">$500</p>
+                <p class="fund-description">
+                    Kindly copy the address below and send the exact worth of 
+                    bitcoin to the copied address.
+                </p>
+                <div class="crypto-container">
+                    <p id="text-to-copy">0x5675a28f77b3158857e325A880F694BD9C7F6F1c</p>
+                    <button id="copy-button">Copy</button>
+                    <span id="copy-prompt" class="hidden">Copied!</span>
+                </div>
+            </div>
+
+            <div class="crypto-display" id="tether">
+                <h2>🇹 USDT ADDRESS</h2>
+                <img src="./img/qr.png" alt="">
+                <p id="fund-amount">$500</p>
+                <p class="fund-description">
+                    Kindly copy the address below and send the exact worth of 
+                    bitcoin to the copied address.
+                </p>
+                <div class="crypto-container">
+                    <p id="text-to-copy">TWEJVp4NLmZLdqfPZ8MLNg8t1i4QmHDMJv</p>
                     <button id="copy-button">Copy</button>
                     <span id="copy-prompt" class="hidden">Copied!</span>
                 </div>
             </div>
         </div>
-
+        
         <!-- ========================== Popups ====================== -->
         <div id="confirmationPopup" class="popup">
             <span id="confirmationMessage">Are you sure you want to log out?</span>
@@ -178,27 +212,50 @@
     <!-- =================== Scripts =====================  -->
     <script>
         // ============= Crypto wallets ================== //
-        document.getElementById('depositForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            const crypto = document.getElementById('crypto').value;
-            let url = '';
+        document.addEventListener('DOMContentLoaded', function () {
+    const depositForm = document.getElementById('depositForm');
+    const depositContainer = document.getElementById('deposit-container');
+    const cryptoDisplays = document.querySelectorAll('.crypto-display');
+    const clearSettingsLink = document.getElementById('clear-settings');
 
-            switch (crypto) {
-                case 'bitcoin':
-                    url = 'btc.html'; // Replace with the actual URL for Bitcoin
-                    break;
-                case 'ethereum':
-                    url = 'eth.html'; // Replace with the actual URL for Ethereum
-                    break;
-                case 'tether':
-                    url = 'usdt.html'; // Replace with the actual URL for Litecoin
-                    break;
-                default:
-                    url = 'default.html'; // Replace with the default URL
-            }
+    depositForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const crypto = document.getElementById('crypto').value;
 
-            window.location.href = url;
-        });
+        // Hide all crypto displays
+        cryptoDisplays.forEach(display => display.classList.remove('flex'));
+
+        // Show selected crypto display
+        const selectedCryptoDisplay = document.getElementById(crypto);
+        if (selectedCryptoDisplay) {
+            selectedCryptoDisplay.classList.add('flex');
+            depositContainer.style.display = 'none';
+
+            // Save settings to localStorage
+            localStorage.setItem('selectedCrypto', crypto);
+        }
+    });
+
+    // Check localStorage on page load
+    const savedCrypto = localStorage.getItem('selectedCrypto');
+    if (savedCrypto) {
+        const savedCryptoDisplay = document.getElementById(savedCrypto);
+        if (savedCryptoDisplay) {
+            savedCryptoDisplay.classList.add('flex');
+            depositContainer.style.display = 'none';
+        }
+    }
+
+    // Clear settings on link click
+    clearSettingsLink.addEventListener('click', function () {
+        localStorage.removeItem('selectedCrypto');
+
+        // Reset display settings
+        cryptoDisplays.forEach(display => display.classList.remove('flex'));
+        depositContainer.style.display = 'flex';
+    });
+});
+
 
         // ==================== Menu Toggle ===================== //
         let toggle = document.querySelector(".toggle");

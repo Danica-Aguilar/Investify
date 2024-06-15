@@ -378,13 +378,13 @@ body {
 }
 
 .deposit-container {
-  display: none;
   background: #fff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   width: 90%;
   margin-top: 5rem;
+  display: flex;
 }
 
 .deposit-container h2 {
@@ -433,42 +433,62 @@ body {
 
 
 /* ======================== Btc Details ======================= */
-.btc {
-  margin: 20px;
-  width: 280px;
+.crypto-display {
+  margin-top: 3rem;
+  width: 80%;
   padding: 1em;
   height: 100%;
   background: var(--bg-color);
-  display: flex;
+  border-radius: 20px;
+  display: none;
   flex-direction: column;
   align-items: center;
   text-align: center;
   box-shadow: 0 0 20px -8px #b5bdb5;
-  flex-wrap: wrap;
   color: var(--pry-color);
-  transition: border 0.2s ease-out;
-  cursor: pointer;
-  border: 1px solid transparent;
 }
 
-.container {
+.crypto-display img {
+  width: 150px;
+  height: 150px;
+}
+
+.crypto-display .fund-description {
+  margin: 3rem 0;
+}
+
+.crypto-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 10px;
+}
+
+#text-to-copy {
+  border: 1px solid var(--pry-color);
+  height: 35px;
+  max-width: 250px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scrollbar-width: thin;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-weight: 500;
 }
 
 #copy-button {
-  padding: 10px 20px;
+  padding: 0 5px;
+  height: 35px;
   cursor: pointer;
-  background-color: #007BFF;
-  color: white;
+  background-color: var(--pry-color);
+  color: var(--white);
   border: none;
-  border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   font-size: 16px;
 }
 
 #copy-button:hover {
-  background-color: #0056b3;
+  background-color: #1e5724;
 }
 
 #copy-prompt {
@@ -479,6 +499,10 @@ body {
 
 .hidden {
   display: none;
+}
+
+.flex {
+  display: flex;
 }
 
 
