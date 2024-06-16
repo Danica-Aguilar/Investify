@@ -98,7 +98,7 @@ function showPrompt(message) {
 
   setTimeout(() => {
     document.body.removeChild(promptContainer);
-  }, 7000);
+  }, 5000);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
