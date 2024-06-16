@@ -11,6 +11,8 @@ import {
   ref,
   get,
   child,
+  set,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -32,6 +34,8 @@ const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("re-fund-amount").textContent = "-"; // Display "-" until data is loaded
+
   onAuthStateChanged(auth, (user) => {
     const loadingScreen = document.getElementById("loading-screen");
     const dashboardContent = document.getElementById("dashboard-content");
@@ -48,8 +52,35 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "login.html";
     }
   });
+
+  const depositForm = document.getElementById('depositForm');
+  depositForm.addEventListener('submit', handleDepositSubmit);
 });
 
+function handleDepositSubmit(event) {
+  event.preventDefault(); // Prevent form from submitting normally
+
+  const crypto = document.getElementById('crypto').value;
+  const fundAmount = document.getElementById('fund-amount').value.trim();
+  const user = auth.currentUser;
+
+  if (user) {
+    const userRef = ref(database, 'users/' + user.uid + '/funding');
+    set(userRef, {
+      crypto: crypto,
+      amount: fundAmount,
+      timestamp: serverTimestamp()
+    }).then(() => {
+      alert('Deposit amount saved successfully!');
+      updateFundAmount(user.uid); // Update the displayed fund amount after saving
+    }).catch(error => {
+      console.error('Error saving deposit:', error);
+      alert('Error saving deposit. Please try again.');
+    });
+  } else {
+    alert('No user is signed in. Please sign in first.');
+  }
+}
 
 // ============== Display user data from Realtime Db ============== //
 function displayUserData(uid) {
@@ -65,6 +96,7 @@ function displayUserData(uid) {
         userDataDiv.innerHTML = `
           <h3>👋Hello, ${firstname}!</h3>
         `;
+        updateFundAmount(uid); // Update the displayed fund amount when user data is displayed
       }
     })
     .catch((error) => {
@@ -72,7 +104,22 @@ function displayUserData(uid) {
     });
 }
 
-
+function updateFundAmount(uid) {
+  const dbRef = ref(database);
+  get(child(dbRef, `users/${uid}/funding`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const depositData = snapshot.val();
+        const amount = depositData.amount || "0";
+        document.getElementById("re-fund-amount").textContent = `$${amount}`;
+      } else {
+        document.getElementById("re-fund-amount").textContent = "No deposited amount found.";
+      }
+    })
+    .catch((error) => {
+      console.error("Error retrieving deposit data: ", error);
+    });
+}
 
 // ============== Logout Fx ================ //
 logoutButton.addEventListener('click', () => {
@@ -110,22 +157,3 @@ const closePopup = () => {
 };
 
 document.querySelector(".close").addEventListener("click", closePopup);
-
-// Location getter
-fetch('https://api.ipify.org?format=json')
-  .then(response => response.json())
-  .then(data => {
-    const ipAddress = data.ip;
-    fetch(`https://ipgeolocation.io/ipgeo?apiKey=94da9689691148a2adf2c689ad9227c3&ip=${ipAddress}`)
-      .then(response => response.json())
-      .then(data => {
-        const { country_name, city, latitude, longitude } = data;
-        const userId = firebase.auth().currentUser.uid;
-        firebase.database().ref(`users/${userId}/location`).set({
-          country: country_name,
-          city: city,
-          latitude: latitude,
-          longitude: longitude
-        });
-      });
-  });

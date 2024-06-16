@@ -383,6 +383,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   width: 90%;
+  max-width: 600px;
   margin-top: 5rem;
   display: flex;
 }
@@ -434,10 +435,11 @@ body {
 
 /* ======================== Btc Details ======================= */
 .crypto-display {
-  margin-top: 3rem;
-  width: 90%;
-  padding: 1em;
-  height: 100%;
+  margin-top: 1rem;
+  width: 80%;
+  max-width: 500px;
+  padding: 1em 1em 2em 1em;
+  height: max-content;
   background: var(--bg-color);
   border-radius: 20px;
   display: none;

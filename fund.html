@@ -135,7 +135,7 @@
             </P>
             <div class="deposit-container" id="fund">
                 <h2>FUND WALLET</h2>
-                <form id="depositForm">
+                <form id="depositForm" action="/">
                     <label for="crypto">Select Cryptocurrency:</label>
                     <select id="crypto" name="crypto">
                         <option value="bitcoin">Bitcoin (BTC)</option>
@@ -144,7 +144,7 @@
                     </select>
 
                     <label for="amount">Amount:</label>
-                    <input type="number" id="amount" min="50" name="amount" required>
+                    <input type="number" id="fund-amount" min="50" name="amount" required>
 
                     <button type="submit">Deposit</button>
                 </form>
@@ -152,9 +152,9 @@
             <div class="crypto-display" id="bitcoin">
                 <h2>₿ITCOIN ADDRESS</h2>
                 <img src="./img/qr.png" alt="">
-                <p id="fund-amount">$500</p>
+                <h3 id="re-fund-amount">$500</h3>
                 <p class="fund-description">
-                    Kindly copy the address below and send the exact worth of 
+                    Kindly copy the address below and send the exact worth of
                     bitcoin to the copied address.
                 </p>
                 <div class="crypto-container">
@@ -167,9 +167,9 @@
             <div class="crypto-display" id="ethereum">
                 <h2>♦️ETHEREUM ADDRESS</h2>
                 <img src="./img/qr.png" alt="">
-                <p id="fund-amount">$500</p>
+                <p id="re-fund-amount"></p>
                 <p class="fund-description">
-                    Kindly copy the address below and send the exact worth of 
+                    Kindly copy the address below and send the exact worth of
                     bitcoin to the copied address.
                 </p>
                 <div class="crypto-container">
@@ -182,9 +182,9 @@
             <div class="crypto-display" id="tether">
                 <h2>💲USDT ADDRESS</h2>
                 <img src="./img/qr.png" alt="">
-                <p id="fund-amount">$500</p>
+                <p id="re-fund-amount"></p>
                 <p class="fund-description">
-                    Kindly copy the address below and send the exact worth of 
+                    Kindly copy the address below and send the exact worth of
                     bitcoin to the copied address.
                 </p>
                 <div class="crypto-container">
@@ -194,7 +194,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- ========================== Popups ====================== -->
         <div id="confirmationPopup" class="popup">
             <span id="confirmationMessage">Are you sure you want to log out?</span>
@@ -213,48 +213,40 @@
     <script>
         // ============= Crypto wallets ================== //
         document.addEventListener('DOMContentLoaded', function () {
-    const depositForm = document.getElementById('depositForm');
-    const depositContainer = document.getElementById('fund');
-    const cryptoDisplays = document.querySelectorAll('.crypto-display');
-    const clearSettingsLink = document.getElementById('clear-settings');
+            const depositForm = document.getElementById('depositForm');
+            const depositContainer = document.getElementById('fund');
+            const cryptoDisplays = document.querySelectorAll('.crypto-display');
+            const clearSettingsLink = document.getElementById('clear-settings');
+            const waitMessage = document.createElement('p');
+            waitMessage.textContent = 'Please wait!';
+            waitMessage.style.display = 'none';
+            depositContainer.parentNode.insertBefore(waitMessage, depositContainer);
 
-    depositForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        const crypto = document.getElementById('crypto').value;
+            depositForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const crypto = document.getElementById('crypto').value;
 
-        // Hide all crypto displays
-        cryptoDisplays.forEach(display => display.classList.remove('flex'));
+                // Hide all crypto displays
+                cryptoDisplays.forEach(display => display.classList.remove('flex'));
 
-        // Show selected crypto display
-        const selectedCryptoDisplay = document.getElementById(crypto);
-        if (selectedCryptoDisplay) {
-            selectedCryptoDisplay.classList.add('flex');
-            depositContainer.style.display = 'none';
+                // Save settings to localStorage
+                localStorage.setItem('selectedCrypto', crypto);
 
-            // Save settings to localStorage
-            localStorage.setItem('selectedCrypto', crypto);
-        }
-    });
+                // Show "Please wait!" message
+                waitMessage.style.display = 'block';
 
-    // Check localStorage on page load
-    const savedCrypto = localStorage.getItem('selectedCrypto');
-    if (savedCrypto) {
-        const savedCryptoDisplay = document.getElementById(savedCrypto);
-        if (savedCryptoDisplay) {
-            savedCryptoDisplay.classList.add('flex');
-            depositContainer.style.display = 'none';
-        }
-    }
+                // Show selected crypto display after a 6-second delay
+                const selectedCryptoDisplay = document.getElementById(crypto);
+                if (selectedCryptoDisplay) {
+                    depositContainer.style.display = 'none';
+                    setTimeout(() => {
+                        waitMessage.style.display = 'none';
+                        selectedCryptoDisplay.classList.add('flex');
+                    }, 6000);
+                }
+            });
+        });
 
-    // Clear settings on link click
-    clearSettingsLink.addEventListener('click', function () {
-        localStorage.removeItem('selectedCrypto');
-
-        // Reset display settings
-        cryptoDisplays.forEach(display => display.classList.remove('flex'));
-        depositContainer.style.display = 'flex';
-    });
-});
 
 
         // ==================== Menu Toggle ===================== //
