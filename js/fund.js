@@ -57,6 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
   depositForm.addEventListener('submit', handleDepositSubmit);
 });
 
+
+// ============== Funding =================//
 function handleDepositSubmit(event) {
   event.preventDefault(); // Prevent form from submitting normally
 
@@ -67,20 +69,43 @@ function handleDepositSubmit(event) {
   if (user) {
     const userRef = ref(database, 'users/' + user.uid + '/funding');
     set(userRef, {
-      crypto: crypto,
-      amount: fundAmount,
-      timestamp: serverTimestamp()
+      amount: fundAmount
     }).then(() => {
-      alert('Deposit amount saved successfully!');
+      showPrompt('Please Wait...');
       updateFundAmount(user.uid); // Update the displayed fund amount after saving
     }).catch(error => {
       console.error('Error saving deposit:', error);
-      alert('Error saving deposit. Please try again.');
+      showPrompt('Error saving deposit. Please try again.');
     });
   } else {
-    alert('No user is signed in. Please sign in first.');
+    showPrompt('No user is signed in. Please sign in first.');
   }
 }
+
+function showPrompt(message) {
+  const promptContainer = document.createElement('div');
+  promptContainer.textContent = message;
+  promptContainer.style.position = 'fixed';
+  promptContainer.style.top = '40%';
+  promptContainer.style.left = '50%';
+  promptContainer.style.transform = 'translateX(-50%)';
+  promptContainer.style.backgroundColor = '#133917';
+  promptContainer.style.color = '#fff';
+  promptContainer.style.padding = '10px 20px';
+  promptContainer.style.borderRadius = '5px';
+  promptContainer.style.zIndex = '1000';
+  document.body.appendChild(promptContainer);
+
+  setTimeout(() => {
+    document.body.removeChild(promptContainer);
+  }, 7000);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const depositForm = document.getElementById('depositForm');
+  depositForm.addEventListener('submit', handleDepositSubmit);
+});
+
 
 // ============== Display user data from Realtime Db ============== //
 function displayUserData(uid) {
@@ -104,6 +129,8 @@ function displayUserData(uid) {
     });
 }
 
+
+// ====================== Retrieving Fund amount data =======================//
 function updateFundAmount(uid) {
   const dbRef = ref(database);
   get(child(dbRef, `users/${uid}/funding`))
@@ -111,15 +138,20 @@ function updateFundAmount(uid) {
       if (snapshot.exists()) {
         const depositData = snapshot.val();
         const amount = depositData.amount || "0";
-        document.getElementById("re-fund-amount").textContent = `$${amount}`;
+        document.querySelectorAll('#re-fund-amount').forEach(element => {
+          element.textContent = `$${amount}`;
+        });
       } else {
-        document.getElementById("re-fund-amount").textContent = "No deposited amount found.";
+        document.querySelectorAll('#re-fund-amount').forEach(element => {
+          element.textContent = "No deposited amount found.";
+        });
       }
     })
     .catch((error) => {
       console.error("Error retrieving deposit data: ", error);
     });
 }
+
 
 // ============== Logout Fx ================ //
 logoutButton.addEventListener('click', () => {

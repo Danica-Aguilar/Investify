@@ -152,7 +152,7 @@
             <div class="crypto-display" id="bitcoin">
                 <h2>₿ITCOIN ADDRESS</h2>
                 <img src="./img/qr.png" alt="">
-                <h3 id="re-fund-amount">$500</h3>
+                <h3 id="re-fund-amount">-</h3>
                 <p class="fund-description">
                     Kindly copy the address below and send the exact worth of
                     bitcoin to the copied address.
@@ -167,10 +167,10 @@
             <div class="crypto-display" id="ethereum">
                 <h2>♦️ETHEREUM ADDRESS</h2>
                 <img src="./img/qr.png" alt="">
-                <p id="re-fund-amount"></p>
+                <h3 id="re-fund-amount">-</h3>
                 <p class="fund-description">
-                    Kindly copy the address below and send the exact worth of
-                    bitcoin to the copied address.
+                    Kindly scan the QR code above or copy the address below and
+                    send the exact USD worth of ethereum to the copied address.
                 </p>
                 <div class="crypto-container">
                     <p id="text-to-copy">0x5675a28f77b3158857e325A880F694BD9C7F6F1c</p>
@@ -182,10 +182,10 @@
             <div class="crypto-display" id="tether">
                 <h2>💲USDT ADDRESS</h2>
                 <img src="./img/qr.png" alt="">
-                <p id="re-fund-amount"></p>
+                <h3 id="re-fund-amount">-</h3>
                 <p class="fund-description">
-                    Kindly copy the address below and send the exact worth of
-                    bitcoin to the copied address.
+                    Kindly scan the QR code above or copy the address below and
+                    send the exact USD worth of USDT to the copied address.
                 </p>
                 <div class="crypto-container">
                     <p id="text-to-copy">TWEJVp4NLmZLdqfPZ8MLNg8t1i4QmHDMJv</p>
@@ -218,7 +218,7 @@
             const cryptoDisplays = document.querySelectorAll('.crypto-display');
             const clearSettingsLink = document.getElementById('clear-settings');
             const waitMessage = document.createElement('p');
-            waitMessage.textContent = 'Please wait!';
+            waitMessage.textContent = '';
             waitMessage.style.display = 'none';
             depositContainer.parentNode.insertBefore(waitMessage, depositContainer);
 
@@ -260,31 +260,35 @@
         };
 
         // ================== Copy details ============= //
-        document.getElementById('copy-button').addEventListener('click', function () {
-            // Get the text to copy
-            const textToCopy = document.getElementById('text-to-copy').innerText;
+        document.querySelectorAll('#copy-button').forEach(copyButton => {
+            copyButton.addEventListener('click', function () {
+                // Get the text to copy from the first element with ID 'text-to-copy'
+                const textToCopy = document.querySelector('#text-to-copy').innerText;
 
-            // Create a temporary textarea element to hold the text
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            document.body.appendChild(textarea);
+                // Create a temporary textarea element to hold the text
+                const textarea = document.createElement('textarea');
+                textarea.value = textToCopy;
+                document.body.appendChild(textarea);
 
-            // Select the text and copy it to the clipboard
-            textarea.select();
-            document.execCommand('copy');
+                // Select the text and copy it to the clipboard
+                textarea.select();
+                document.execCommand('copy');
 
-            // Remove the temporary textarea element
-            document.body.removeChild(textarea);
+                // Remove the temporary textarea element
+                document.body.removeChild(textarea);
 
-            // Show the "Copied!" prompt
-            const copyPrompt = document.getElementById('copy-prompt');
-            copyPrompt.classList.remove('hidden');
+                // Show the "Copied!" prompt for each copy prompt element
+                document.querySelectorAll('#copy-prompt').forEach(copyPrompt => {
+                    copyPrompt.classList.remove('hidden');
 
-            // Hide the prompt after 2 seconds
-            setTimeout(function () {
-                copyPrompt.classList.add('hidden');
-            }, 2000);
+                    // Hide the prompt after 2 seconds
+                    setTimeout(function () {
+                        copyPrompt.classList.add('hidden');
+                    }, 2000);
+                });
+            });
         });
+
 
 
         // ========== Close popup when clicking outside of it ========== //

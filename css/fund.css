@@ -455,8 +455,13 @@ body {
   height: 150px;
 }
 
-.crypto-display .fund-description {
+.crypto-display {
   margin: 3rem 0;
+}
+
+.fund-description {
+  margin: 1rem 0;
+  font-weight: 400;
 }
 
 .crypto-container {
