@@ -32,6 +32,8 @@ const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
+  const numberElement = document.querySelectorAll('#number-element');
+
   onAuthStateChanged(auth, (user) => {
     const loadingScreen = document.getElementById("loading-screen");
     const dashboardContent = document.getElementById("dashboard-content");
@@ -46,6 +48,19 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "login.html";
     }
   });
+
+
+  if (numberElement) {
+    const number = parseFloat(numberElement.textContent.trim());
+    const formattedNumber = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    }).format(number);
+    numberElement.textContent = formattedNumber;
+  }
+
+
 });
 
 
@@ -65,7 +80,7 @@ function displayUserData(uid) {
         const balanceElement = document.getElementById("balance");
         balanceElement.innerHTML = `
           <div id="balance">
-            <div class="numbers">${balance}</div>
+            <div class="numbers" id="number-element">${balance}</div>
             <div class="cardName">Balance</div>
           </div>
         `;

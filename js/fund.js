@@ -35,6 +35,7 @@ const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("re-fund-amount").textContent = "-"; // Display "-" until data is loaded
+  const numberElement = document.querySelectorAll('#number-element');
 
   onAuthStateChanged(auth, (user) => {
     const loadingScreen = document.getElementById("loading-screen");
@@ -52,6 +53,13 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "login.html";
     }
   });
+
+  if (numberElement) {
+    const number = parseFloat(numberElement.textContent.trim());
+    if (!isNaN(number)) {
+        numberElement.textContent = number.toLocaleString('en-US');
+    }
+}
 
   const depositForm = document.getElementById('depositForm');
   depositForm.addEventListener('submit', handleDepositSubmit);

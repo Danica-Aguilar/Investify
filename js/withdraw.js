@@ -35,6 +35,7 @@ const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
     const withdrawalForm = document.getElementById('withdrawalForm');
+    const numberElement = document.querySelectorAll('#number-element');
 
     onAuthStateChanged(auth, (user) => {
         const loadingScreen = document.getElementById("loading-screen");
@@ -79,6 +80,13 @@ document.addEventListener("DOMContentLoaded", function () {
             alert('No user is signed in. Please sign in first.');
         }
     });
+
+    if (numberElement) {
+        const number = parseFloat(numberElement.textContent.trim());
+        if (!isNaN(number)) {
+            numberElement.textContent = number.toLocaleString('en-US');
+        }
+    }
 });
 
 // ============== Display user data from Realtime Db ============== //
