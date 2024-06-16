@@ -68,7 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (withdrawAmount > balance) {
                         alert('Insufficient balance.');
                     } else {
-                        alert('Withdrawal initiated, wait while we process it.');
+                        alert('Withdrawal Processing...');
+                        window.location.href = "withdraw.html";
                     }
                 } else {
                     alert('No balance information found.');

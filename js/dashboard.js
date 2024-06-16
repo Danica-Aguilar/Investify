@@ -32,7 +32,7 @@ const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
-  const numberElement = document.querySelectorAll('#number-element');
+  const numberElements = document.querySelectorAll('#number-element');
 
   onAuthStateChanged(auth, (user) => {
     const loadingScreen = document.getElementById("loading-screen");
@@ -49,19 +49,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-
-  if (numberElement) {
-    const number = parseFloat(numberElement.textContent.trim());
+  numberElements.forEach(element => {
+    const number = parseFloat(element.textContent.trim());
     const formattedNumber = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2
     }).format(number);
-    numberElement.textContent = formattedNumber;
-  }
-
-
+    element.textContent = formattedNumber;
+  });
 });
+
 
 
 // ============== Display user data from Realtime Db ============== //
