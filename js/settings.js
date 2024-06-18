@@ -67,6 +67,7 @@ function displayUserData(uid) {
                 userDataDiv.innerHTML = `
           <h3>👋Hello, ${firstname}!</h3>
         `;
+        updateProfileName(uid);
             }
         })
         .catch((error) => {
@@ -76,20 +77,22 @@ function displayUserData(uid) {
 
 
 // ====================== Retrieving username data =======================//
-function updateFundAmount(uid) {
+function updateProfileName(uid) {
     const dbRef = ref(database);
     get(child(dbRef, `users/${uid}`))
         .then((snapshot) => {
             if (snapshot.exists()) {
                 const depositData = snapshot.val();
-                const firstname = depositData.firstname || "-";
-                document.querySelectorAll('#text-to-copy').forEach(element => {
-                    element.textContent = `${firstname}`;
+                const lastname = depositData.lastname || "-";
+                // Select the input element and set its value
+                document.querySelectorAll('#fullname').forEach(element => {
+                    element.value = lastname;
+                    element.disabled = true; // Disable the input element
                 });
             }
         })
         .catch((error) => {
-            console.error("Error retrieving deposit data: ", error);
+            console.error("Error retrieving data: ", error);
         });
 }
 
