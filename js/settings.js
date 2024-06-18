@@ -67,7 +67,7 @@ function displayUserData(uid) {
                 userDataDiv.innerHTML = `
           <h3>👋Hello, ${firstname}!</h3>
         `;
-        updateProfileName(uid);
+                updateProfileName(uid);
             }
         })
         .catch((error) => {
@@ -82,12 +82,20 @@ function updateProfileName(uid) {
     get(child(dbRef, `users/${uid}`))
         .then((snapshot) => {
             if (snapshot.exists()) {
-                const depositData = snapshot.val();
-                const lastname = depositData.lastname || "-";
+                const profileData = snapshot.val();
+                const lastname = profileData.lastname || "-";
+                const email = profileData.email || "-";
+
                 // Select the input element and set its value
                 document.querySelectorAll('#fullname').forEach(element => {
                     element.value = lastname;
                     element.disabled = true; // Disable the input element
+                });
+
+                // Update email
+                document.querySelectorAll('#profile-email').forEach(element => {
+                    element.value = email;
+                    element.disabled = true;
                 });
             }
         })
