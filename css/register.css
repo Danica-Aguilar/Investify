@@ -27,6 +27,7 @@ body {
 #form {
   width: 100%;
   max-width: 400px;
+  height: fit-content;
   margin: 0 auto;
   padding: 20px;
   background-color: var(--bg-color);
@@ -124,6 +125,7 @@ body {
   color: #ff3860;
   font-size: 12px;
   height: 13px;
+  max-height: fit-content;
   margin-top: 5px;
 }
 
@@ -200,4 +202,21 @@ body {
 
 .close:hover {
   color: #333;
+}
+
+@media (max-width: 481px) {
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  table,
+  a,
+  label,
+  ul,
+  li {
+    font-size: smaller;
+  }
 }

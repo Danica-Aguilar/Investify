@@ -112,6 +112,26 @@ function displayUserData(uid) {
         });
 }
 
+
+// ====================== Retrieving username data =======================//
+function updateFundAmount(uid) {
+    const dbRef = ref(database);
+    get(child(dbRef, `users/${uid}`))
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const depositData = snapshot.val();
+                const firstname = depositData.firstname || "-";
+                document.querySelectorAll('#text-to-copy').forEach(element => {
+                    element.textContent = `${firstname}`;
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error retrieving deposit data: ", error);
+        });
+}
+
+
 // ============== Logout Fx ================ //
 logoutButton.addEventListener('click', () => {
     localStorage.clear(); // Clear the storage

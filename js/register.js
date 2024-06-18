@@ -62,7 +62,7 @@ const isValidEmail = (email) => {
 };
 
 const isValidUsername = (username) => {
-  const re = /^[a-zA-Z][a-zA-Z0-9._]{2,15}$/;
+  const re = /^[a-zA-Z][a-zA-Z0-9._]{1,15}$/;
   return re.test(username);
 };
 
@@ -116,15 +116,15 @@ const validateInputs = async () => {
   let isValid = true;
 
   if (firstnameValue === "") {
-    setError(firstname, "First name is required");
+    setError(firstname, "Username is required");
     isValid = false;
   } else if (!isValidUsername(firstnameValue)) {
-    setError(firstname, "First name must be 3-16 characters, start with a letter, and contain only letters, numbers, underscores, and periods.");
+    setError(firstname, "Username should 3-16 chars, begin with a letter. Should contain: nums, letters,underscores and contain only letters, numbers, underscores, and periods.");
     isValid = false;
   } else {
     const isUniqueFirstname = await checkUniqueFirstname(firstnameValue);
     if (!isUniqueFirstname) {
-      setError(firstname, "First name already taken");
+      setError(firstname, "Username already taken");
       isValid = false;
     } else {
       setSuccess(firstname);
@@ -132,7 +132,7 @@ const validateInputs = async () => {
   }
 
   if (lastnameValue === "") {
-    setError(lastname, "Last name is required");
+    setError(lastname, "Full name is required");
     isValid = false;
   } else {
     setSuccess(lastname);
@@ -147,7 +147,7 @@ const validateInputs = async () => {
   } else {
     const isUniqueEmail = await checkUniqueEmail(emailValue);
     if (!isUniqueEmail) {
-      setError(email, "Email already taken");
+      setError(email, "Email already in use");
       isValid = false;
     } else {
       setSuccess(email);

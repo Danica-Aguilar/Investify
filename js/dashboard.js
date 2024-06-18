@@ -70,7 +70,7 @@ function displayUserData(uid) {
       if (snapshot.exists()) {
         const userData = snapshot.val();
         const firstname = userData.firstname || " User ";
-        const balance = userData.balance || " $0 ";
+        const balance = userData.balance || " 0 ";
         const investments = userData.investments || " 0 ";
         const deposits = userData.deposits || " 0 ";
         const referrals = userData.referrals || " 0 ";
