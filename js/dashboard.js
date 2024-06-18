@@ -83,6 +83,8 @@ function displayUserData(uid) {
           </div>
         `;
 
+   
+
         const investmentsElement = document.getElementById("investments");
         investmentsElement.innerHTML = `
         <div id="investments">
