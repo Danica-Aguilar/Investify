@@ -61,12 +61,40 @@ const isValidEmail = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
-// Function to check if username already exists in the database
-const checkUsernameExists = async (username) => {
-  const dbRef = ref(database, `users`);
+const checkUniqueFirstname = async (firstname) => {
+  const dbRef = ref(getDatabase());
   try {
-    const snapshot = await get(child(dbRef, username));
-    return snapshot.exists();
+    const snapshot = await get(child(dbRef, 'users'));
+    if (snapshot.exists()) {
+      const users = snapshot.val();
+      const lowerFirstname = firstname.toLowerCase();
+      for (let userId in users) {
+        if (users[userId].firstname.toLowerCase() === lowerFirstname) {
+          return false;
+        }
+      }
+    }
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const checkUniqueEmail = async (email) => {
+  const dbRef = ref(getDatabase());
+  try {
+    const snapshot = await get(child(dbRef, 'users'));
+    if (snapshot.exists()) {
+      const users = snapshot.val();
+      const lowerEmail = email.toLowerCase();
+      for (let userId in users) {
+        if (users[userId].email.toLowerCase() === lowerEmail) {
+          return false;
+        }
+      }
+    }
+    return true;
   } catch (error) {
     console.error(error);
     return false;
@@ -83,22 +111,20 @@ const validateInputs = async () => {
   let isValid = true;
 
   if (firstnameValue === "") {
-    setError(firstname, "First name is required");
+    setError(firstname, "Username is required");
     isValid = false;
   } else {
-    setSuccess(firstname);
-  }
-
-  /* 
-  const usernameExists = await checkUsernameExists(usernameValue);
-    if (usernameExists) {
-      setError(username, "Lastname already taken");
+    const isUniqueFirstname = await checkUniqueFirstname(firstnameValue);
+    if (!isUniqueFirstname) {
+      setError(firstname, "Username already taken");
       isValid = false;
     } else {
-   */
+      setSuccess(firstname);
+    }
+  }
 
   if (lastnameValue === "") {
-    setError(lastname, "Last name is required");
+    setError(lastname, "Full name is required");
     isValid = false;
   } else {
     setSuccess(lastname);
@@ -111,7 +137,13 @@ const validateInputs = async () => {
     setError(email, "Provide a valid email address");
     isValid = false;
   } else {
-    setSuccess(email);
+    const isUniqueEmail = await checkUniqueEmail(emailValue);
+    if (!isUniqueEmail) {
+      setError(email, "Email already in use");
+      isValid = false;
+    } else {
+      setSuccess(email);
+    }
   }
 
   if (passwordValue === "") {
@@ -136,6 +168,15 @@ const validateInputs = async () => {
 
   return isValid;
 };
+
+// Add event listener to form submit
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const isValid = await validateInputs();
+  if (isValid) {
+    // Proceed with form submission
+  }
+});
 
 // Popup functions
 const showPopup = (message) => {
