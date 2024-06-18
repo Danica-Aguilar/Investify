@@ -78,7 +78,7 @@ function displayUserData(uid) {
         const balanceElement = document.getElementById("balance");
         balanceElement.innerHTML = `
           <div id="balance">
-            <div class="numbers" id="number-element">${balance}</div>
+            <div class="numbers">$${balance}.00</div>
             <div class="cardName">Balance</div>
           </div>
         `;

@@ -40,12 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
     onAuthStateChanged(auth, (user) => {
         const loadingScreen = document.getElementById("loading-screen");
         const dashboardContent = document.getElementById("dashboard-content");
-        const withdrawal = document.getElementById("withdraw");
+        const referral = document.getElementById("refer");
 
         if (user) {
             loadingScreen.style.display = "none";
             dashboardContent.style.display = "block";
-            withdrawal.style.display = "block";
+            referral.style.display = "block";
 
             const userId = user.uid;
             displayUserData(userId);

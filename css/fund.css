@@ -384,7 +384,7 @@ body {
   border-radius: 20px;
   width: 90%;
   max-width: 600px;
-  margin-top: 5rem;
+  margin-top: 1rem;
   display: flex;
 }
 
@@ -460,7 +460,7 @@ body {
 }
 
 .fund-description {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   font-weight: 400;
 }
 
@@ -587,27 +587,9 @@ body {
   .main.active {
     left: 200px;
   }
-
-  .cardBox {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .details {
-    grid-template-columns: 1fr;
-  }
-
-  .recentOrders {
-    overflow-x: auto;
-  }
 }
 
 @media (max-width: 480px) {
-  .cardBox {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  
   .user {
     min-width: 40px;
   }

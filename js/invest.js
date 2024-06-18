@@ -35,12 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
   onAuthStateChanged(auth, (user) => {
     const loadingScreen = document.getElementById("loading-screen");
     const dashboardContent = document.getElementById("dashboard-content");
-    const fundWallet = document.getElementById("fund");
+    const invest = document.getElementById("invest");
 
     if (user) {
       loadingScreen.style.display = "none";
       dashboardContent.style.display = "block";
-      fundWallet.style.display = "block";
+      invest.style.display = "block";
 
       const userId = user.uid;
       displayUserData(userId);
