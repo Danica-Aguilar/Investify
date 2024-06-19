@@ -119,7 +119,7 @@ const validateInputs = async () => {
     setError(firstname, "Username is required");
     isValid = false;
   } else if (!isValidUsername(firstnameValue)) {
-    setError(firstname, "3-16 chars, begin with a letter. Contain: letters, numbers underscores and periods. ");
+    setError(firstname, "3-16 chars, begin with a letter. Contain: letters, numbers underscores and periods.");
     isValid = false;
   } else {
     const isUniqueFirstname = await checkUniqueFirstname(firstnameValue);
@@ -218,6 +218,7 @@ submit.addEventListener("click", async (event) => {
           firstname: firstnameValue,
           lastname: lastnameValue,
           email: emailValue,
+          role: "user",
           balance: 0,
           investments: 0,
           deposits: 0,
