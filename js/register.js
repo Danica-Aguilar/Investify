@@ -217,7 +217,11 @@ submit.addEventListener("click", async (event) => {
         set(ref(database, 'users/' + user.uid), {
           firstname: firstnameValue,
           lastname: lastnameValue,
-          email: emailValue
+          email: emailValue,
+          balance: 0,
+          investments: 0,
+          deposits: 0,
+          referrals: 0
         }).then(() => {
           showPopup(
             "Account Created Successfully 😁. Redirecting to Login Page..."
