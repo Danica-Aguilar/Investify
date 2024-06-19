@@ -119,7 +119,7 @@ const validateInputs = async () => {
     setError(firstname, "Username is required");
     isValid = false;
   } else if (!isValidUsername(firstnameValue)) {
-    setError(firstname, "Username should 3-16 chars, begin with a letter. Should contain: nums, letters,underscores and contain only letters, numbers, underscores, and periods.");
+    setError(firstname, "3-16 chars, begin with a letter. Contain: letters, numbers underscores and periods. ");
     isValid = false;
   } else {
     const isUniqueFirstname = await checkUniqueFirstname(firstnameValue);
