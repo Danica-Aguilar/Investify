@@ -596,6 +596,7 @@ nav div button:hover:nth-child(2) {
 .option {
   position: relative;
   margin-bottom: 1em;
+  padding: 0 1rem;
 }
 
 .title,
