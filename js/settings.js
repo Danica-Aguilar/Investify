@@ -105,6 +105,13 @@ function updateProfileName(uid) {
 }
 
 
+// ============ Profile settings update ============ //
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+});
+
+
 // ============== Logout Fx ================ //
 logoutButton.addEventListener('click', () => {
     localStorage.clear(); // Clear the storage

@@ -431,7 +431,7 @@ body {
     margin-top: 20px;
 }
 
-.form :where(.input-box input, .select-box) {
+.form :where(.input-box input, .input-box select) {
     position: relative;
     height: 45px;
     width: 100%;
@@ -442,7 +442,8 @@ body {
     padding: 0 15px;
 }
 
-.input-box input:focus {
+.input-box input:focus,
+.input-box select:focus {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -485,21 +486,12 @@ body {
     color: var(--pry-color);
 }
 
-.address :where(input, .select-box) {
+.address :where(input) {
     margin-top: 15px;
 }
 
-.select-box select {
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    color: var(--pry-color);
-    font-size: 1rem;
-}
-
 .form button {
-    height: 55px;
+    height: 45px;
     width: 100%;
     color: #fff;
     font-size: 1rem;
@@ -655,4 +647,9 @@ body {
     label {
         font-size: smaller;
     }
+}
+
+
+* {
+    color: var(--pry-color);
 }

@@ -1,8 +1,22 @@
-document
-  .querySelector(".menu-btn")
-  .addEventListener("click", () =>
-    document.querySelector(".main-menu").classList.toggle("show")
-  );
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-btn');
+    const mobileMenu = document.querySelector('.main-menu');
+    const menuLinks = document.querySelectorAll('.menu-link');
+
+    // Toggle the menu visibility
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('show');
+    });
+
+    // Add click event listeners to menu links
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('show');
+        });
+    });
+});
+
 
 /* ------------------------- Plan section ----------------------- */
 function check() {
