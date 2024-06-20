@@ -39,33 +39,46 @@ const dashboardContent = document.getElementById("dashboard-content");
 document.addEventListener("DOMContentLoaded", () => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            loadingScreen.style.display = "block";
-            dashboardContent.style.display = "none";
+            showLoadingScreen();
             checkUserRole(user.uid);
         } else {
-            window.location.href = "login.html";
+            redirectToLogin();
         }
     });
 });
+
+// Show loading screen and hide dashboard content
+function showLoadingScreen() {
+    loadingScreen.style.display = "block";
+    dashboardContent.style.display = "none";
+}
+
+// Hide loading screen and show dashboard content
+function hideLoadingScreen() {
+    loadingScreen.style.display = "none";
+    dashboardContent.style.display = "block";
+}
+
+// Redirect to login page
+function redirectToLogin() {
+    window.location.href = "login.html";
+}
 
 // Check user's role
 function checkUserRole(uid) {
     const dbRef = ref(database);
     get(child(dbRef, `users/${uid}/role`))
         .then((snapshot) => {
-            if (snapshot.exists() && snapshot.val() === "admin") {
-                // User is admin, show the dashboard
-                loadingScreen.style.display = "none";
-                dashboardContent.style.display = "block";
+            if (snapshot.exists() && snapshot.val().includes("admin")) {
+                hideLoadingScreen();
                 fetchUsers(); // Fetch and display users
             } else {
-                // User is not admin, redirect to login page
-                window.location.href = "login.html";
+                redirectToLogin();
             }
         })
         .catch((error) => {
             console.error("Error retrieving user role: ", error);
-            window.location.href = "login.html"; // Redirect to login page on error
+            redirectToLogin(); // Redirect to login page on error
         });
 }
 
@@ -83,6 +96,10 @@ function fetchUsers() {
                 <td>${user.uid}</td>
                 <td>${user.email}</td>
                 <td>${user.username}</td>
+                <td>${user.balance}</td>
+                <td>${user.investments}</td>
+                <td>${user.deposits}</td>
+                <td>${user.referrals}</td>
                 <td>
                     <button onclick="editUser('${user.uid}')">Edit</button>
                     <button onclick="deleteUser('${user.uid}')">Delete</button>
