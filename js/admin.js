@@ -39,30 +39,14 @@ const dashboardContent = document.getElementById("dashboard-content");
 document.addEventListener("DOMContentLoaded", () => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            showLoadingScreen();
+            loadingScreen.style.display = "block";
+            dashboardContent.style.display = "none";
             checkUserRole(user.uid);
         } else {
-            redirectToLogin();
+            window.location.href = "login.html";
         }
     });
 });
-
-// Show loading screen and hide dashboard content
-function showLoadingScreen() {
-    loadingScreen.style.display = "block";
-    dashboardContent.style.display = "none";
-}
-
-// Hide loading screen and show dashboard content
-function hideLoadingScreen() {
-    loadingScreen.style.display = "none";
-    dashboardContent.style.display = "block";
-}
-
-// Redirect to login page
-function redirectToLogin() {
-    window.location.href = "login.html";
-}
 
 // Check user's role
 function checkUserRole(uid) {
@@ -70,15 +54,18 @@ function checkUserRole(uid) {
     get(child(dbRef, `users/${uid}/role`))
         .then((snapshot) => {
             if (snapshot.exists() && snapshot.val() === "admin") {
-                hideLoadingScreen();
+                // User is admin, show the dashboard
+                loadingScreen.style.display = "none";
+                dashboardContent.style.display = "block";
                 fetchUsers(); // Fetch and display users
             } else {
-                redirectToLogin();
+                // User is not admin, redirect to login page
+                window.location.href = "login.html";
             }
         })
         .catch((error) => {
             console.error("Error retrieving user role: ", error);
-            redirectToLogin(); // Redirect to login page on error
+            window.location.href = "login.html"; // Redirect to login page on error
         });
 }
 
