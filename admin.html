@@ -27,7 +27,7 @@
     <div id="loading-screen" class="loading">Loading...</div>
 
     <!-- =============== Navigation ================ -->
-    <div class="container" id="dashboard-content">
+    <div class="container" id="dashboard-content" style="display: none;">
         <div class="navigation">
             <ul>
                 <li>
@@ -42,7 +42,7 @@
                 </li>
 
                 <li class="active-link">
-                    <a href="dashboard.html">
+                    <a href="admin.html">
                         <span class="icon">
                             🏠
                         </span>
@@ -51,52 +51,16 @@
                 </li>
 
                 <li>
-                    <a href="fund.html">
-                        <span class="icon">
-                            💰
-                        </span>
-                        <span class="title">Fund Wallet</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="invest.html">
-                        <span class="icon">
-                            📈
-                        </span>
-                        <span class="title">Invest</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="withdraw.html">
-                        <span class="icon">
-                            🏛️
-                        </span>
-                        <span class="title">Withdrawal</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="refer.html">
-                        <span class="icon">
-                            👨‍👦‍👦
-                        </span>
-                        <span class="title">Refferals</span>
-                    </a>
-                </li>
-
-                <li>
                     <a href="settings.html">
                         <span class="icon">
                             ⚙️
                         </span>
-                        <span class="title">Profile</span>
+                        <span class="title">Settings</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#" id="logoutButton">
+                    <a id="logoutButton">
                         <span class="icon">
                             <img src="./img/shutdown.png" alt="">
                         </span>
@@ -116,6 +80,7 @@
 
                 <div class="logo">
                     <span class="user-info">
+                        2345678987654
                     </span>
                 </div>
 
@@ -125,65 +90,96 @@
                     </a>
                 </div>
             </div>
-        </div>
 
-        <!-- ================ Admin ===================== -->
-        <div id="admin-dashboard">
-            <h1>Admin Dashboard</h1>
-            <table id="users-table">
-                <thead>
-                    <tr>
-                        <th>UID</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="users-list">
-                    <!-- User rows will be populated here -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- ========================== Popups ====================== -->
-        <div id="confirmationPopup" class="popup">
-            <span id="confirmationMessage">Are you sure you want to log out?</span>
-            <div>
-                <button id="confirmYes" class="confirm-button">Yes</button>
-                <button id="confirmNo" class="confirm-button">No</button>
+            <!-- ======================= Admin dashboard ================== -->
+            <div id="admin-dashboard">
+                <h1>Admin Dashboard</h1>
+                <table id="users-table">
+                    <thead>
+                        <tr>
+                            <th>UID</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-list">
+                        <!-- User rows will be populated here -->
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div id="popup" class="popup">
-            <span id="popup-message"></span>
-            <span class="close-popup">&times;</span>
-        </div>
-    </div>
 
-    <!-- =================== Scripts =====================  -->
-    <script>
-        // ==================== Menu Toggle ===================== //
-        let toggle = document.querySelector(".toggle");
-        let navigation = document.querySelector(".navigation");
-        let main = document.querySelector(".main");
 
-        toggle.onclick = function () {
-            navigation.classList.toggle("active");
-            main.classList.toggle("active");
-        };
+            <!-- ========================== Popups ====================== -->
+            <div id="confirmationPopup" class="popup">
+                <span id="confirmationMessage">Are you sure you want to log out?</span>
+                <div>
+                    <button id="confirmYes" class="confirm-button">Yes</button>
+                    <button id="confirmNo" class="confirm-button">No</button>
+                </div>
+            </div>
+            <div id="popup" class="popup">
+                <span id="popup-message"></span>
+                <span class="close-popup">&times;</span>
+            </div>
 
-        // ========== Close popup when clicking outside of it ========== //
-        window.onclick = function (event) {
-            const popup = document.getElementById('popup');
-            if (event.target === popup) {
-                popup.style.display = 'none';
-            }
-        }
+            <!-- =================== Scripts =====================  -->
+            <script>
+                // ==================== Menu Toggle ===================== //
+                let toggle = document.querySelector(".toggle");
+                let navigation = document.querySelector(".navigation");
+                let main = document.querySelector(".main");
 
-        // Close popup when clicking the close button
-        document.querySelector('.close-popup').onclick = function () {
-            document.getElementById('popup').style.display = 'none';
-        }
-    </script>
+                toggle.onclick = function () {
+                    navigation.classList.toggle("active");
+                    main.classList.toggle("active");
+                };
+
+                // ============== Hide Figures Fx ============ //
+                document.addEventListener("DOMContentLoaded", function () {
+                    const eyeIcon = document.getElementById("eye");
+                    const eyeSlashIcon = document.getElementById("eye-slash");
+                    const numbersElements = document.querySelectorAll(".numbers");
+
+                    function toggleVisibility(show) {
+                        numbersElements.forEach(element => {
+                            if (show) {
+                                // Show original content
+                                element.innerHTML = element.getAttribute("data-value");
+                            } else {
+                                // Mask content
+                                element.innerHTML = "****";
+                            }
+                        });
+                        eyeIcon.style.display = show ? 'none' : 'inline';
+                        eyeSlashIcon.style.display = show ? 'inline' : 'none';
+                    }
+
+                    eyeIcon.addEventListener("click", function () {
+                        toggleVisibility(true);
+                    });
+
+                    eyeSlashIcon.addEventListener("click", function () {
+                        toggleVisibility(false);
+                    });
+
+                    // Initial state
+                    toggleVisibility(false);
+                });
+
+                // ========== Close popup when clicking outside of it ========== //
+                window.onclick = function (event) {
+                    const popup = document.getElementById('popup');
+                    if (event.target === popup) {
+                        popup.style.display = 'none';
+                    }
+                }
+
+                // Close popup when clicking the close button
+                document.querySelector('.close-popup').onclick = function () {
+                    document.getElementById('popup').style.display = 'none';
+                }
+            </script>
 </body>
 
 </html>
