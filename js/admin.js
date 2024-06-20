@@ -1,5 +1,3 @@
-// Initialize Firebase (make sure this is done before using Firebase)
-// Replace the config object with your Firebase project's config
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
     getAuth,
@@ -11,6 +9,7 @@ import {
     ref,
     get,
     child,
+    onValue
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -73,119 +72,55 @@ function checkUserRole(uid) {
                 hideLoadingScreen();
                 fetchUsers(); // Fetch and display users
             } else {
+                console.warn("User is not an admin. Redirecting to login.");
                 redirectToLogin();
             }
         })
         .catch((error) => {
-            console.error("Error retrieving user role: ", error);
-            redirectToLogin(); // Redirect to login page on error
+            console.error("Error retrieving user role:", error);
+            redirectToLogin();
         });
 }
 
-// Fetch and display users data from Realtime Database
+// Fetch and display users
 function fetchUsers() {
-    const dbRef = ref(database, 'users');
-    dbRef.on('value', (snapshot) => {
-        const usersList = document.getElementById('users-list');
-        usersList.innerHTML = '';
-
-        snapshot.forEach((userSnapshot) => {
-            const user = userSnapshot.val();
-            const userRow = document.createElement('tr');
-            userRow.innerHTML = `
-                <td>${user.uid}</td>
+    const usersList = document.getElementById("users-list");
+    const usersRef = ref(database, "users");
+    onValue(usersRef, (snapshot) => {
+        usersList.innerHTML = ""; // Clear the list before adding new users
+        snapshot.forEach((childSnapshot) => {
+            const user = childSnapshot.val();
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${childSnapshot.key}</td>
                 <td>${user.email}</td>
                 <td>${user.username}</td>
-                <td>${user.balance}</td>
-                <td>${user.investments}</td>
-                <td>${user.deposits}</td>
-                <td>${user.referrals}</td>
                 <td>
-                    <button onclick="editUser('${user.uid}')">Edit</button>
-                    <button onclick="deleteUser('${user.uid}')">Delete</button>
+                    <button class="edit-button">Edit</button>
+                    <button class="delete-button">Delete</button>
                 </td>
             `;
-            usersList.appendChild(userRow);
+            usersList.appendChild(row);
         });
     });
 }
 
-// Edit user details
-function editUser(uid) {
-    const newEmail = prompt("Enter new email:");
-    const newUsername = prompt("Enter new username:");
+// Handle logout
+logoutButton.addEventListener("click", () => {
+    confirmationPopup.style.display = "block";
+});
 
-    if (newEmail && newUsername) {
-        const userRef = ref(database, 'users/' + uid);
-        userRef.update({
-            email: newEmail,
-            username: newUsername
-        });
-    }
-}
-
-// Delete user
-function deleteUser(uid) {
-    if (confirm("Are you sure you want to delete this user?")) {
-        const userRef = ref(database, 'users/' + uid);
-        userRef.remove();
-    }
-}
-
-function displayUserData(uid) {
-    const dbRef = ref(database);
-    get(child(dbRef, `users/${uid}`))
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const userData = snapshot.val();
-                const firstname = userData.firstname || " User ";
-
-                const userDataDiv = document.querySelector(".user-info");
-                userDataDiv.innerHTML = `
-            <h3>👋Hello, ${firstname}!</h3>
-          `;
-            }
+confirmYes.addEventListener("click", () => {
+    signOut(auth)
+        .then(() => {
+            confirmationPopup.style.display = "none";
+            redirectToLogin();
         })
         .catch((error) => {
-            console.error("Error retrieving user data: ", error);
+            console.error("Sign out error:", error);
         });
-}
-
-// Logout functionality
-logoutButton.addEventListener('click', () => {
-    confirmationPopup.classList.add("show");
 });
 
-confirmYes.addEventListener('click', () => {
-    signOut(auth).then(() => {
-        localStorage.clear(); // Clear the storage
-        showPopup("Logged out successfully!");
-        setTimeout(() => {
-            window.location.href = "login.html";
-        }, 2000);
-    }).catch((error) => {
-        console.error("Error logging out:", error);
-        showPopup("Error logging out: " + error.message);
-    });
-    confirmationPopup.classList.remove("show");
+confirmNo.addEventListener("click", () => {
+    confirmationPopup.style.display = "none";
 });
-
-confirmNo.addEventListener('click', () => {
-    confirmationPopup.classList.remove("show");
-});
-
-// Show popup
-const showPopup = (message) => {
-    const popup = document.getElementById("popup");
-    const popupMessage = document.getElementById("popup-message");
-    popupMessage.textContent = message;
-    popup.classList.add("show");
-};
-
-// Close popup
-const closePopup = () => {
-    const popup = document.getElementById("popup");
-    popup.classList.remove("show");
-};
-
-document.querySelector(".close").addEventListener("click", closePopup);
