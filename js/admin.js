@@ -88,42 +88,35 @@ function checkUserRole(uid) {
 }
 
 // Fetch and display users, excluding admins
-function fetchUsers(currentAdminUid) {
+function fetchUsers() {
     const usersList = document.getElementById("users-list");
     const usersRef = ref(database, "users");
     onValue(usersRef, (snapshot) => {
         usersList.innerHTML = ""; // Clear the list before adding new users
         snapshot.forEach((childSnapshot) => {
             const user = childSnapshot.val();
-            const uid = childSnapshot.key;
-
-            // Check if the user is an admin
-            if (user.role && user.role.includes("admin") && uid === currentAdminUid) {
-                return; // Skip adding current admin to the dashboard
-            }
-
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${user.lastname}</td>
                 <td>${user.email}</td>
                 <td>
                     ${user.balance}<br>
-                    <button class="edit-balance" data-uid="${uid}">Edit</button>
+                    <button class="edit-balance" data-uid="${childSnapshot.key}">Edit</button>
                 </td>
                 <td>
                     ${user.investments}<br>
-                    <button class="edit-investments" data-uid="${uid}">Edit</button>
+                    <button class="edit-investments" data-uid="${childSnapshot.key}">Edit</button>
                 </td>
                 <td>
                     ${user.deposits}<br>
-                    <button class="edit-deposits" data-uid="${uid}">Edit</button>
+                    <button class="edit-deposits" data-uid="${childSnapshot.key}">Edit</button>
                 </td>
                 <td>
                     ${user.referrals}<br>
-                    <button class="edit-referrals" data-uid="${uid}">Edit</button>
+                    <button class="edit-balance" data-uid="${childSnapshot.key}">Edit</button>
                 </td>
                 <td>
-                    <button class="delete-button" data-uid="${uid}">Delete</button>
+                    <button class="delete-button" data-uid="${childSnapshot.key}">Delete</button>
                 </td>
             `;
             usersList.appendChild(row);
@@ -163,6 +156,21 @@ function fetchUsers(currentAdminUid) {
                 const uid = button.getAttribute("data-uid");
                 deleteUserDataAndAccount(uid);
             });
+        });
+    });
+
+    // Add event listener for search input
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", () => {
+        const searchText = searchInput.value.toLowerCase();
+        const rows = usersList.getElementsByTagName("tr");
+        Array.from(rows).forEach((row) => {
+            const name = row.getElementsByTagName("td")[0].textContent.toLowerCase();
+            if (name.includes(searchText)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
         });
     });
 }
@@ -235,3 +243,4 @@ function displayUserData(uid) {
             console.error("Error retrieving user data: ", error);
         });
 }
+

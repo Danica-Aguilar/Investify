@@ -11,8 +11,7 @@ import {
   ref,
   get,
   child,
-  set,
-  serverTimestamp
+  set
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 const firebaseConfig = {

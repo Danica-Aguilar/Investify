@@ -181,152 +181,132 @@
                         <a href="#" class="btn">View All</a>
                     </div>
 
-                    <table>
+                    <table id="transactions-table">
                         <thead>
                             <tr>
-                                <td>Type</td>
-                                <td>Price</td>
-                                <td>Date</td>
-                                <td>Status</td>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Wallet Fund</td>
-                                <td>$1200</td>
-                                <td>12/21/2024<br>13:45PM</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Wallet Fund</td>
-                                <td>$110</td>
-                                <td>11/21/2024<br>21:44PM</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Wallet Withdrawal</td>
-                                <td>$1200</td>
-                                <td>10/24/2024<br>6:01AM</td>
-                                <td><span class="status return">Failed</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Investments History</h2>
-                        <a href="#" class="btn">View All</a>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Plan</td>
-                                <td>Price</td>
-                                <td>Date</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Gold</td>
-                                <td>$1200</td>
-                                <td>12/21/2024<br>13:45PM</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Bronze</td>
-                                <td>$110</td>
-                                <td>12/21/2024<br>13:45PM</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Platinum</td>
-                                <td>$1200</td>
-                                <td>12/21/2024<br>13:45PM</td>
-                                <td><span class="status return">Failed</span></td>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- ========================== Popups ====================== -->
-            <div id="confirmationPopup" class="popup">
-                <span id="confirmationMessage">Are you sure you want to log out?</span>
-                <div>
-                    <button id="confirmYes" class="confirm-button">Yes</button>
-                    <button id="confirmNo" class="confirm-button">No</button>
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>Investments History</h2>
+                    <a href="#" class="btn">View All</a>
                 </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Plan</td>
+                            <td>Price</td>
+                            <td>Date</td>
+                            <td>Status</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Gold</td>
+                            <td>$1200</td>
+                            <td>12/21/2024<br>13:45PM</td>
+                            <td><span class="status delivered">Delivered</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Bronze</td>
+                            <td>$110</td>
+                            <td>12/21/2024<br>13:45PM</td>
+                            <td><span class="status pending">Pending</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Platinum</td>
+                            <td>$1200</td>
+                            <td>12/21/2024<br>13:45PM</td>
+                            <td><span class="status return">Failed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div id="popup" class="popup">
-                <span id="popup-message"></span>
-                <span class="close-popup">&times;</span>
+        </div>
+
+        <!-- ========================== Popups ====================== -->
+        <div id="confirmationPopup" class="popup">
+            <span id="confirmationMessage">Are you sure you want to log out?</span>
+            <div>
+                <button id="confirmYes" class="confirm-button">Yes</button>
+                <button id="confirmNo" class="confirm-button">No</button>
             </div>
+        </div>
+        <div id="popup" class="popup">
+            <span id="popup-message"></span>
+            <span class="close-popup">&times;</span>
+        </div>
 
-            <!-- =================== Scripts =====================  -->
-            <script>
-                // ==================== Menu Toggle ===================== //
-                let toggle = document.querySelector(".toggle");
-                let navigation = document.querySelector(".navigation");
-                let main = document.querySelector(".main");
+        <!-- =================== Scripts =====================  -->
+        <script>
+            // ==================== Menu Toggle ===================== //
+            let toggle = document.querySelector(".toggle");
+            let navigation = document.querySelector(".navigation");
+            let main = document.querySelector(".main");
 
-                toggle.onclick = function () {
-                    navigation.classList.toggle("active");
-                    main.classList.toggle("active");
-                };
+            toggle.onclick = function () {
+                navigation.classList.toggle("active");
+                main.classList.toggle("active");
+            };
 
-                // ============== Hide Figures Fx ============ //
-                document.addEventListener("DOMContentLoaded", function () {
-                    const eyeIcon = document.getElementById("eye");
-                    const eyeSlashIcon = document.getElementById("eye-slash");
-                    const numbersElements = document.querySelectorAll(".numbers");
+            // ============== Hide Figures Fx ============ //
+            document.addEventListener("DOMContentLoaded", function () {
+                const eyeIcon = document.getElementById("eye");
+                const eyeSlashIcon = document.getElementById("eye-slash");
+                const numbersElements = document.querySelectorAll(".numbers");
 
-                    function toggleVisibility(show) {
-                        numbersElements.forEach(element => {
-                            if (show) {
-                                // Show original content
-                                element.innerHTML = element.getAttribute("data-value");
-                            } else {
-                                // Mask content
-                                element.innerHTML = "****";
-                            }
-                        });
-                        eyeIcon.style.display = show ? 'none' : 'inline';
-                        eyeSlashIcon.style.display = show ? 'inline' : 'none';
-                    }
-
-                    eyeIcon.addEventListener("click", function () {
-                        toggleVisibility(true);
+                function toggleVisibility(show) {
+                    numbersElements.forEach(element => {
+                        if (show) {
+                            // Show original content
+                            element.innerHTML = element.getAttribute("data-value");
+                        } else {
+                            // Mask content
+                            element.innerHTML = "****";
+                        }
                     });
+                    eyeIcon.style.display = show ? 'none' : 'inline';
+                    eyeSlashIcon.style.display = show ? 'inline' : 'none';
+                }
 
-                    eyeSlashIcon.addEventListener("click", function () {
-                        toggleVisibility(false);
-                    });
+                eyeIcon.addEventListener("click", function () {
+                    toggleVisibility(true);
+                });
 
-                    // Initial state
+                eyeSlashIcon.addEventListener("click", function () {
                     toggleVisibility(false);
                 });
 
-                // ========== Close popup when clicking outside of it ========== //
-                window.onclick = function (event) {
-                    const popup = document.getElementById('popup');
-                    if (event.target === popup) {
-                        popup.style.display = 'none';
-                    }
-                }
+                // Initial state
+                toggleVisibility(false);
+            });
 
-                // Close popup when clicking the close button
-                document.querySelector('.close-popup').onclick = function () {
-                    document.getElementById('popup').style.display = 'none';
+            // ========== Close popup when clicking outside of it ========== //
+            window.onclick = function (event) {
+                const popup = document.getElementById('popup');
+                if (event.target === popup) {
+                    popup.style.display = 'none';
                 }
-            </script>
+            }
+
+            // Close popup when clicking the close button
+            document.querySelector('.close-popup').onclick = function () {
+                document.getElementById('popup').style.display = 'none';
+            }
+        </script>
 </body>
 
 </html>

@@ -11,6 +11,7 @@ import {
   ref,
   get,
   child,
+  onChildAdded
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -32,7 +33,6 @@ const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
-  const numberElements = document.querySelectorAll('#number-element');
 
   onAuthStateChanged(auth, (user) => {
     const loadingScreen = document.getElementById("loading-screen");
@@ -44,19 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const userId = user.uid;
       displayUserData(userId);
+      listenForNewTransactions(userId); // Listen for new transactions
     } else {
       window.location.href = "login.html";
     }
-  });
-
-  numberElements.forEach(element => {
-    const number = parseFloat(element.textContent.trim());
-    const formattedNumber = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-    }).format(number);
-    element.textContent = formattedNumber;
   });
 });
 
@@ -121,6 +112,46 @@ function displayUserData(uid) {
 }
 
 
+
+// =================== Transaction Fx ======================= //
+// Function to format date
+function formatDate(timestamp) {
+  const date = new Date(timestamp);
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}<br>${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+}
+
+// Function to add a new transaction to the table
+function addTransactionToTable(transaction) {
+  const tableBody = document.querySelector("table tbody");
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+      <td>${transaction.type}</td>
+      <td>$${transaction.amount}</td>
+      <td>${formatDate(transaction.date)}</td>
+      <td><span class="status ${transaction.status.toLowerCase()}">${transaction.status}</span></td>
+  `;
+
+  tableBody.appendChild(row);
+}
+
+// Function to listen for new transactions
+function listenForNewTransactions(userId) {
+  const transactionsRef = ref(database, `users/${userId}/transactions`);
+
+  onChildAdded(transactionsRef, (snapshot) => {
+    const newTransaction = snapshot.val();
+    addTransactionToTable(newTransaction);
+  });
+}
+
+// Example usage: Replace 'userId' with the actual user ID
+const userId = "USER_ID"; // Replace with the actual user ID
+listenForNewTransactions(userId);
+
+
+
+
 // ============== Logout Fx ================ //
 logoutButton.addEventListener('click', () => {
   localStorage.clear(); // Clear the storage
@@ -157,22 +188,3 @@ const closePopup = () => {
 };
 
 document.querySelector(".close").addEventListener("click", closePopup);
-
-// Location getter
-fetch('https://api.ipify.org?format=json')
-  .then(response => response.json())
-  .then(data => {
-    const ipAddress = data.ip;
-    fetch(`https://ipgeolocation.io/ipgeo?apiKey=94da9689691148a2adf2c689ad9227c3&ip=${ipAddress}`)
-      .then(response => response.json())
-      .then(data => {
-        const { country_name, city, latitude, longitude } = data;
-        const userId = firebase.auth().currentUser.uid;
-        firebase.database().ref(`users/${userId}/location`).set({
-          country: country_name,
-          city: city,
-          latitude: latitude,
-          longitude: longitude
-        });
-      });
-  });
