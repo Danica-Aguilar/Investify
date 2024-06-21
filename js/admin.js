@@ -2,15 +2,19 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/fireba
 import {
     getAuth,
     onAuthStateChanged,
-    signOut
+    signOut,
+    deleteUser
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 import {
     getDatabase,
     ref,
     get,
     child,
-    onValue
+    onValue,
+    update,
+    remove
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-functions.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDosNrhPrcRC2UpOu9Wu3N2p3jaUwbJyDI",
@@ -25,6 +29,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
+const functions = getFunctions(app);
 
 // DOM elements
 const logoutButton = document.getElementById("logoutButton");
@@ -70,7 +75,7 @@ function checkUserRole(uid) {
         .then((snapshot) => {
             if (snapshot.exists() && snapshot.val().includes("admin")) {
                 hideLoadingScreen();
-                fetchUsers(); // Fetch and display users
+                fetchUsers(uid); // Fetch and display users
             } else {
                 console.warn("User is not an admin. Redirecting to login.");
                 redirectToLogin();
@@ -82,27 +87,113 @@ function checkUserRole(uid) {
         });
 }
 
-// Fetch and display users
-function fetchUsers() {
+// Fetch and display users, excluding admins
+function fetchUsers(currentAdminUid) {
     const usersList = document.getElementById("users-list");
     const usersRef = ref(database, "users");
     onValue(usersRef, (snapshot) => {
         usersList.innerHTML = ""; // Clear the list before adding new users
         snapshot.forEach((childSnapshot) => {
             const user = childSnapshot.val();
+            const uid = childSnapshot.key;
+
+            // Check if the user is an admin
+            if (user.role && user.role.includes("admin") && uid === currentAdminUid) {
+                return; // Skip adding current admin to the dashboard
+            }
+
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${childSnapshot.key}</td>
+                <td>${user.lastname}</td>
                 <td>${user.email}</td>
-                <td>${user.username}</td>
                 <td>
-                    <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
+                    ${user.balance}<br>
+                    <button class="edit-balance" data-uid="${uid}">Edit</button>
+                </td>
+                <td>
+                    ${user.investments}<br>
+                    <button class="edit-investments" data-uid="${uid}">Edit</button>
+                </td>
+                <td>
+                    ${user.deposits}<br>
+                    <button class="edit-deposits" data-uid="${uid}">Edit</button>
+                </td>
+                <td>
+                    ${user.referrals}<br>
+                    <button class="edit-referrals" data-uid="${uid}">Edit</button>
+                </td>
+                <td>
+                    <button class="delete-button" data-uid="${uid}">Delete</button>
                 </td>
             `;
             usersList.appendChild(row);
         });
+
+        // Add event listeners for edit buttons
+        document.querySelectorAll(".edit-balance").forEach(button => {
+            button.addEventListener("click", () => {
+                const uid = button.getAttribute("data-uid");
+                editField(uid, "balance");
+            });
+        });
+
+        document.querySelectorAll(".edit-investments").forEach(button => {
+            button.addEventListener("click", () => {
+                const uid = button.getAttribute("data-uid");
+                editField(uid, "investments");
+            });
+        });
+
+        document.querySelectorAll(".edit-deposits").forEach(button => {
+            button.addEventListener("click", () => {
+                const uid = button.getAttribute("data-uid");
+                editField(uid, "deposits");
+            });
+        });
+
+        document.querySelectorAll(".edit-referrals").forEach(button => {
+            button.addEventListener("click", () => {
+                const uid = button.getAttribute("data-uid");
+                editField(uid, "referrals");
+            });
+        });
+
+        document.querySelectorAll(".delete-button").forEach(button => {
+            button.addEventListener("click", () => {
+                const uid = button.getAttribute("data-uid");
+                deleteUserDataAndAccount(uid);
+            });
+        });
     });
+}
+
+// Edit specific user field
+function editField(uid, field) {
+    const newValue = prompt(`Enter new ${field}:`);
+
+    if (newValue) {
+        const userRef = ref(database, 'users/' + uid);
+        const updates = {};
+        updates[field] = newValue;
+        update(userRef, updates).catch((error) => {
+            console.error(`Error updating ${field}:`, error);
+        });
+    }
+}
+
+// Delete user data and account
+function deleteUserDataAndAccount(uid) {
+    if (confirm("Are you sure you want to delete this user?")) {
+        // Call the cloud function to delete user data and account
+        const deleteUserFunction = httpsCallable(functions, 'deleteUser');
+        deleteUserFunction({ uid: uid })
+            .then(() => {
+                console.log("User successfully deleted.");
+            })
+            .catch((error) => {
+                console.error("Error deleting user:", error);
+            });
+    }
 }
 
 // Handle logout
@@ -124,3 +215,23 @@ confirmYes.addEventListener("click", () => {
 confirmNo.addEventListener("click", () => {
     confirmationPopup.style.display = "none";
 });
+
+// Display user data
+function displayUserData(uid) {
+    const dbRef = ref(database);
+    get(child(dbRef, `users/${uid}`))
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                const firstname = userData.firstname || " User ";
+
+                const userDataDiv = document.querySelector(".user-info");
+                userDataDiv.innerHTML = `
+                    <h3>👋Hello, ${firstname}!</h3>
+                `;
+            }
+        })
+        .catch((error) => {
+            console.error("Error retrieving user data: ", error);
+        });
+}

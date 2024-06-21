@@ -34,6 +34,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     font-family: "Poppins";
+    color: var(--pry-color);
 }
 
 .container {
@@ -360,10 +361,18 @@ body {
 
 /* =========== Admin Dashboard =============== */
 #admin-dashboard {
+    width: 90%;
+    overflow: scroll;
+    margin: 4rem 2rem 0 2rem;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: var(--pry-color);
+}
+
+#admin-dashboard h2 {
+    color: var(--pry-color);
 }
 
 table {
@@ -375,6 +384,7 @@ th,
 td {
     padding: 10px;
     border: 1px solid #ddd;
+    text-align: center;
 }
 
 th {
@@ -388,6 +398,18 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.edit-button:hover {
+    background: #207429;
+}
+
+.delete-button {
+    background: red;
+}
+
+.delete-button:hover {
+    background: #bd0e1f;
 }
 
 
