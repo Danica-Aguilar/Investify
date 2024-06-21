@@ -344,6 +344,12 @@ body {
     height: 20px;
 }
 
+#searchInput {
+    height: 35px;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
 .settings {
     cursor: pointer;
 }
