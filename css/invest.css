@@ -49,6 +49,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     font-family: "Poppins";
+    color: var(--pry-color);
 }
 
 .container {
@@ -58,7 +59,25 @@ body {
 }
 
 /* ------------------------------ Loading -------------------------------- */
-/* Absolute Center Spinner */
+#progress-bar-container {
+    width: 100%;
+    height: 4px;
+    background-color: #f3f3f3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+#progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: #4caf50;
+}
+
+
+
+/* ----------------Absolute Center Spinner --------------------*/
 .loading {
     position: fixed;
     z-index: 999;
@@ -494,6 +513,7 @@ form {
     max-width: 280px;
     padding: 1em;
     height: 100%;
+    border-radius: 20px;
     background: var(--bg-color);
     display: flex;
     flex-direction: column;
@@ -512,7 +532,7 @@ form {
     transition: 0.5s;
 }
 
-.packages input[type="radio"]:checked + .packages {
+.packages input[type="radio"]:checked+.packages {
     border: 2px solid var(--pry-color);
 }
 
@@ -562,9 +582,10 @@ button {
     padding: 10px;
     background-color: var(--pry-color);
     color: white;
-    border: none;
+    border: 2px solid var(--pry-color);
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
     transition: all 0.5s;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -575,7 +596,8 @@ button {
 }
 
 button:hover {
-    background-color: #2d7528;
+    background-color: #fff;
+    color: var(--pry-color);
     transition: all 0.5s;
 }
 

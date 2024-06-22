@@ -1,5 +1,3 @@
-// Initialize Firebase (make sure this is done before using Firebase)
-// Replace the config object with your Firebase project's config
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
   getAuth,
@@ -50,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 // ============== Display user data from Realtime Db ============== //
 function displayUserData(uid) {
   const dbRef = ref(database);
@@ -71,8 +68,6 @@ function displayUserData(uid) {
       console.error("Error retrieving user data: ", error);
     });
 }
-
-
 
 // ============== Logout Fx ================ //
 logoutButton.addEventListener('click', () => {
@@ -109,23 +104,46 @@ const closePopup = () => {
   popup.classList.remove("show");
 };
 
-document.querySelector(".close").addEventListener("click", closePopup);
+document.querySelector(".close-popup").addEventListener("click", closePopup);
 
-// Location getter
-fetch('https://api.ipify.org?format=json')
-  .then(response => response.json())
-  .then(data => {
-    const ipAddress = data.ip;
-    fetch(`https://ipgeolocation.io/ipgeo?apiKey=94da9689691148a2adf2c689ad9227c3&ip=${ipAddress}`)
-      .then(response => response.json())
-      .then(data => {
-        const { country_name, city, latitude, longitude } = data;
-        const userId = firebase.auth().currentUser.uid;
-        firebase.database().ref(`users/${userId}/location`).set({
-          country: country_name,
-          city: city,
-          latitude: latitude,
-          longitude: longitude
-        });
+// ============== Form Submission Check ============== //
+document.getElementById('investmentForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting
+
+  // Get selected package
+  const selectedPackage = document.querySelector('input[name="package"]:checked');
+  if (!selectedPackage) {
+    showPopup('Please select a package.');
+    return;
+  }
+
+  const packageElement = selectedPackage.closest('.packages');
+  const packageValue = parseFloat(packageElement.querySelector('.text1').textContent.replace(/[^\d.]/g, ''));
+
+  // Fetch user balance from Firebase
+  const user = auth.currentUser;
+  if (user) {
+    const userId = user.uid;
+    get(child(ref(database), `users/${userId}/balance`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const balance = snapshot.val();
+
+          if (balance < packageValue) {
+            showPopup('Insufficient balance, kindly top up balance for this package.');
+          } else {
+            showPopup('Investment Plan activated');
+            // Add additional logic here if needed (e.g., process the investment)
+          }
+        } else {
+          showPopup('Balance information not found.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user balance:', error);
+        showPopup('An error occurred. Please try again later.');
       });
-  });
+  } else {
+    showPopup('User not authenticated.');
+  }
+});
