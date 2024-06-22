@@ -21,10 +21,10 @@
 
   <div class="container">
     <form id="form" action="/">
-      <div class="logo-wrapper">
+      <a href="index.html" class="logo-wrapper">
         <img class="logo-img" src="./img/logo.png" loading="lazy" alt="Investify" />
         <h3>INVESTIFY</h3>
-      </div>
+      </a>
       <div class="input-control">
         <label for="firstname">Username</label>
         <input id="firstname" name="firstname" type="text" />
@@ -49,6 +49,10 @@
         <label for="password2">Confirm Password</label>
         <input id="password2" name="password2" type="password" />
         <div class="error"></div>
+      </div>
+      <div class="input-control">
+        <label for="referral">Referral code(optional)</label>
+        <input id="referral" name="referral" type="text" />
       </div>
       <p>Already Have an account? <a href="login.html">Sign In</a></p>
       <button type="submit" id="submit" onclick="save()">Register</button>

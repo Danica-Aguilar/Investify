@@ -54,13 +54,13 @@ submit.addEventListener("click", function (event) {
             setTimeout(() => {
               document.getElementById("popup-success").style.display = "none";
               window.location.href = "admin.html"; // Admin dashboard
-            }, 10000); // 1-second timeout
+            }, 1000); // 1-second timeout
           } else {
             document.getElementById("popup-success").style.display = "block";
             setTimeout(() => {
               document.getElementById("popup-success").style.display = "none";
               window.location.href = "dashboard.html"; // User dashboard
-            }, 10000); // 1-second timeout
+            }, 1000); // 1-second timeout
           }
         } else {
           console.error("No user data found");
@@ -82,7 +82,6 @@ submit.addEventListener("click", function (event) {
 
 document.getElementById("close-popup-success").addEventListener("click", function () {
   document.getElementById("popup-success").style.display = "none";
-  window.location.href = "dashboard.html"; // Assuming default is user dashboard
 });
 
 document.getElementById("close-popup-error").addEventListener("click", function () {

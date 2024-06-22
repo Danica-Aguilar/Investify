@@ -11,6 +11,10 @@ body {
   height: 100vh;
 }
 
+a {
+  text-decoration: none;
+}
+
 :root {
   --pry-color: #133917;
   --bg-color: #fff;
@@ -53,6 +57,8 @@ body {
   background-color: var(--bg-color);
   font-size: 14px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin-top: 1rem;
 }
 
 .logo-wrapper {
@@ -88,14 +94,17 @@ body {
   color: white;
   background-color: var(--pry-color);
   cursor: pointer;
-  border: none;
+  border: 1px solid var(--pry-color);
+  border-radius: 10px;
   font-size: 18px;
   font-weight: bold;
 }
 
 #form button:hover {
-  background-color: #2d7528;
+  background-color: var(--bg-color);
+  border: 1px solid var(--pry-color);
   transition: all 0.5s;
+  color: var(--pry-color);
 }
 
 #form p a {
@@ -104,6 +113,10 @@ body {
 
 #form p {
   text-align: center;
+}
+
+#form p a {
+  text-decoration: underline;
 }
 
 .input-control {
