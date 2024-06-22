@@ -303,8 +303,22 @@ ul {
   transition: 0.5s;
 }
 
-/* --------------- Steps section ----------------- */
 
+
+/* --------------- Steps section ----------------- */
+.steps img {
+  width: 150px;
+  width: 150px;
+  padding: 2.5rem;
+  box-shadow: 0 0 20px -8px #b5bdb5;
+  border-radius: 20px;
+  margin-top: 2rem;
+}
+
+.steps-parts p {
+  margin: 0 1rem;
+  text-align: left;
+}
 
 /* -------------------- Plan section --------------------- */
 .top {
@@ -550,7 +564,7 @@ nav div button:hover:nth-child(2) {
 
 /* ---------------- Patners -------------------- */
 .feedback-header {
-  margin-top: 6rem;
+  margin-top: 6rem 1rem 0 1rem;
 }
 
 .feedback-div {
@@ -618,12 +632,6 @@ nav div button:hover:nth-child(2) {
 .details .name {
   font-size: 14px;
   font-weight: 600;
-  color: var(--pry-color);
-}
-
-.details .job {
-  font-size: 12px;
-  font-weight: 400;
   color: var(--pry-color);
 }
 
