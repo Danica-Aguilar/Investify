@@ -199,14 +199,24 @@ function editField(uid, field) {
 // Delete user data and account
 function deleteUserDataAndAccount(uid) {
     if (confirm("Are you sure you want to delete this user?")) {
-        // Call the cloud function to delete user data and account
-        const deleteUserFunction = httpsCallable(functions, 'deleteUser');
-        deleteUserFunction({ uid: uid })
+        // Remove user data from the database
+        const userRef = ref(database, 'users/' + uid);
+        remove(userRef)
             .then(() => {
-                console.log("User successfully deleted.");
+                console.log("User data successfully deleted from database.");
+
+                // Call the cloud function to delete user account
+                const deleteUserFunction = httpsCallable(functions, 'deleteUser');
+                deleteUserFunction({ uid: uid })
+                    .then(() => {
+                        console.log("User account successfully deleted.");
+                    })
+                    .catch((error) => {
+                        console.error("Error deleting user account:", error);
+                    });
             })
             .catch((error) => {
-                console.error("Error deleting user:", error);
+                console.error("Error deleting user data from database:", error);
             });
     }
 }
