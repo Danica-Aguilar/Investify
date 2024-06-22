@@ -577,7 +577,7 @@ form {
     }
 }
 
-button {
+form button {
     position: relative;
     padding: 10px;
     background-color: var(--pry-color);
@@ -595,7 +595,7 @@ button {
     user-select: none;
 }
 
-button:hover {
+form button:hover {
     background-color: #fff;
     color: var(--pry-color);
     transition: all 0.5s;
@@ -633,14 +633,16 @@ button:hover {
     font-size: 14px;
     font-weight: bold;
     width: 40px;
-    background: #41b938;
+    background: var(--pry-color);
     border: 1px solid var(--pry-color);
     cursor: pointer;
+    padding: 0.5rem;
 }
 
 .popup .close:hover,
 .close-popup:hover {
-  color: black;
+  color: var(--pry-color);
+  background: #fff;
   transition: 1s;
   text-decoration: none;
   cursor: pointer;

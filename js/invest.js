@@ -30,9 +30,13 @@ const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 const progressBar = document.getElementById("progress-bar");
 
-// Function to update the progress bar
 function updateProgressBar(progress) {
   progressBar.style.width = `${progress}%`;
+  if (progress === 0 || progress === 100) {
+    document.getElementById("progress-bar-container").style.display = 'none';
+  } else {
+    document.getElementById("progress-bar-container").style.display = 'block';
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -47,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
       invest.style.display = "block";
 
       const userId = user.uid;
+      updateProgressBar(20);
       displayUserData(userId);
     } else {
       window.location.href = "login.html";
@@ -56,7 +61,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ============== Display user data from Realtime Db ============== //
 function displayUserData(uid) {
-  updateProgressBar(20);
   const dbRef = ref(database);
   get(child(dbRef, `users/${uid}`))
     .then((snapshot) => {
@@ -70,11 +74,11 @@ function displayUserData(uid) {
         userDataDiv.innerHTML = `
           <h3>👋Hello, ${firstname}!</h3>
         `;
-        updateProgressBar(100);
-        setTimeout(() => {
-          document.getElementById("progress-bar-container").style.display = 'none';
-        }, 500); // Hide progress bar
       }
+      updateProgressBar(100);
+      setTimeout(() => {
+        updateProgressBar(0);
+      }, 500); // Hide progress bar
     })
     .catch((error) => {
       console.error("Error retrieving user data: ", error);
@@ -121,7 +125,7 @@ const closePopup = () => {
 document.querySelector(".close-popup").addEventListener("click", closePopup);
 
 // ============== Form Submission Check ============== //
-document.getElementById('investmentForm').addEventListener('submit', function (event) {
+document.getElementById('investmentForm').addEventListener('submit', function(event) {
   event.preventDefault(); // Prevent the form from submitting
 
   // Get selected package
@@ -156,7 +160,7 @@ document.getElementById('investmentForm').addEventListener('submit', function (e
         }
         updateProgressBar(100);
         setTimeout(() => {
-          document.getElementById("progress-bar-container").style.display = 'none';
+          updateProgressBar(0);
         }, 500); // Hide progress bar
       })
       .catch((error) => {
