@@ -12,6 +12,12 @@ body {
   padding: 0;
 }
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 a {
   text-decoration: none;
 }
@@ -21,9 +27,7 @@ a {
   --bg-color: #fff;
 }
 
-body {
-  height: 50% !important;
-}
+
 
 .logo-wrapper {
   display: flex;
@@ -31,7 +35,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
-  color: #133917;
+  color: var(--pry-color);
 }
 
 .logo-img {
@@ -59,7 +63,7 @@ input[type="password"] {
   padding-right: 4px;
   padding-left: 4px;
   border: none;
-  border-radius: 2px;
+  border-radius: 8px;
   background-color: var(--bg-color);
   border-bottom: 2px solid #4a7d47;
   font-size: 18px;
@@ -78,13 +82,14 @@ input[type="password"]:autofill {
 
 .loginDiv {
   position: relative;
-  margin: auto;
-  margin-top: 18vh;
-  width: 350px;
+  margin: 0 1rem;
+  width: 100%;
+  max-width: 350px;
   height: 450px;
   background-color: var(--bg-color);
   box-sizing: content-box;
   box-shadow: 0 0 20px -8px #bcbdbc;
+  border-radius: 20px;
 }
 
 .reset-already {
@@ -113,12 +118,14 @@ input[type="password"]:autofill {
   bottom: 32px;
   left: 5%;
   width: 90%;
-  padding: 10px;
+  padding: 5px;
   background-color: var(--pry-color);
   color: white;
-  border: none;
+  border: 2px solid var(--pry-color);
+  border-radius: 8px;
   cursor: pointer;
   font-size: 18px;
+  font-weight: bold;
   transition: all 0.5s;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -129,8 +136,8 @@ input[type="password"]:autofill {
 }
 
 .login:hover {
-  bottom: 32px;
-  background-color: #2d7528;
+  background-color: #fff;
+  color: var(--pry-color);
   transition: all 0.5s;
 }
 
@@ -229,7 +236,8 @@ input[aria-invalid="true"] {
   border-radius: 5px;
 }
 
-#popup-success h2 {
+#popup-success h2,
+#sent-email h2 {
   color: rgb(95, 158, 0);
 }
 
@@ -238,15 +246,28 @@ input[aria-invalid="true"] {
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
+  color: #fff;
+  font-size: 14px;
   font-weight: bold;
+  width: 40px;
+  background: #41b938;
+  border: 1px solid var(--pry-color);
 }
 
 .close:hover,
 .close:focus {
   color: black;
+  transition: 1s;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+@media (max-width: 480px) {
+  p,
+  label,
+  a,
+  button {
+    font-size: small;
+  }
 }

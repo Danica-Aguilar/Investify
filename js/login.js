@@ -1,14 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 import {
   getDatabase,
   ref,
   get,
-  child,
+  child
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -54,13 +54,13 @@ submit.addEventListener("click", function (event) {
             setTimeout(() => {
               document.getElementById("popup-success").style.display = "none";
               window.location.href = "admin.html"; // Admin dashboard
-            }, 1000); // 1-second timeout
+            }, 10000); // 1-second timeout
           } else {
             document.getElementById("popup-success").style.display = "block";
             setTimeout(() => {
               document.getElementById("popup-success").style.display = "none";
               window.location.href = "dashboard.html"; // User dashboard
-            }, 1000); // 1-second timeout
+            }, 10000); // 1-second timeout
           }
         } else {
           console.error("No user data found");
@@ -82,7 +82,7 @@ submit.addEventListener("click", function (event) {
 
 document.getElementById("close-popup-success").addEventListener("click", function () {
   document.getElementById("popup-success").style.display = "none";
-  window.location.href = "user_dashboard.html"; // Assuming default is user dashboard
+  window.location.href = "dashboard.html"; // Assuming default is user dashboard
 });
 
 document.getElementById("close-popup-error").addEventListener("click", function () {
@@ -95,3 +95,33 @@ const showPopup = (message) => {
   document.getElementById("popup-error").textContent = message;
   document.getElementById("popup-error").style.display = "block";
 };
+
+const showReset = (message) => {
+  document.getElementById("sent-email").textContent = message;
+  document.getElementById("sent-email").style.display = "block";
+};
+
+
+const reset = document.getElementById("reset");
+reset.addEventListener("click", function (event) {
+  event.preventDefault()
+
+  const email = document.getElementById("email").value;
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+      document.getElementById("sent-email").style.display = "block";
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage);
+      // ..
+    });
+
+  document.getElementById("close-sent").addEventListener("click", function () {
+    document.getElementById("sent-email").style.display = "none";
+  });
+
+})

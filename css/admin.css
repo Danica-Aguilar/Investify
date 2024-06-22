@@ -346,8 +346,10 @@ body {
 
 #searchInput {
     height: 35px;
-    border-radius: 10px;
-    padding: 1rem;
+    border-radius: 20px;
+    margin-left: 0.3rem;
+    padding: 1rem 0.8rem 1rem 1rem;
+    text-align: center;
 }
 
 .settings {
@@ -372,12 +374,8 @@ body {
     margin: 4rem 2rem 0 2rem;
     background-color: #fff;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: var(--pry-color);
-}
-
-#admin-dashboard h2 {
     color: var(--pry-color);
 }
 
@@ -516,6 +514,10 @@ button {
         margin-top: -.1rem;
         margin-right: 1rem;
         z-index: 10001;
+    }
+
+    #searchInput {
+        width: 110px;
     }
 
     .main.active {

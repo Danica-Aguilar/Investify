@@ -1,106 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
-    <link rel="icon" href="./img/logo.png" />
-    <link rel="stylesheet" href="./css/login.css" />
-    <script type="module" src="./js/login.js" defer></script>
-  </head>
-  <body>
-    <div class="loginDiv" id="loginDiv">
-      <div class="logo-wrapper">
-        <img
-          class="logo-img"
-          src="./img/logo.png"
-          loading="lazy"
-          alt="Investify"
-        />
-        <h3>INVESTIFY</h3>
-      </div>
-      <div class="inputField">
-        <input type="email" id="email" required aria-invalid="false" />
-        <label>Email</label>
-      </div>
-      <div class="inputField">
-        <input type="password" id="password" required aria-invalid="false" />
-        <label>Password</label>
-      </div>
-      <div
-        class="error"
-        aria-errormessage="Invalid email or password."
-        id="error"
-      >
-        <p>You have entered an invalid email or password.</p>
-      </div>
-      <p class="reset-already"><a href="reset.html">Forgot Password?</a></p>
-      <p class="reset-already-two">Don't have an account? <a href="register.html">Register</a></p>
-      <button id="submit" class="login">Login</button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In</title>
+  <link rel="icon" href="./img/logo.png" />
+  <link rel="stylesheet" href="./css/login.css" />
+  <script type="module" src="./js/login.js" defer></script>
+</head>
+
+<body>
+  <div class="loginDiv" id="loginDiv">
+    <a href="index.html" class="logo-wrapper">
+      <img class="logo-img" src="./img/logo.png" loading="lazy" alt="Investify" />
+      <h3>INVESTIFY</h3>
+    </a>
+    <div class="inputField">
+      <input type="email" id="email" required aria-invalid="false" />
+      <label>Email</label>
     </div>
-
-    <!-- ------------------------------- Error and Succes Popup -------------------------- -->
-    <div id="popup-success" class="popup">
-      <div class="popup-content">
-        <span class="close" id="close-popup-success">&times;</span>
-        <h2>Login Successful!</h2>
-        <p>Welcome to Investify 😊</p>
-      </div>
+    <div class="inputField">
+      <input type="password" id="password" required aria-invalid="false" />
+      <label>Password</label>
     </div>
-    <div id="popup-error" class="popup">
-      <div class="popup-content">
-        <span class="close" id="close-popup-error">&times;</span>
-        <h2>Login Failed</h2>
-        <p>Invalid email or password. Please try again.</p>
-      </div>
+    <div class="error" aria-errormessage="Invalid email or password." id="error">
+      <p>You have entered an invalid email or password.</p>
     </div>
+    <p class="reset-already"><a href="#" id="reset">Forgot Password?</a></p>
+    <p class="reset-already-two">Don't have an account? <a href="register.html">Register</a></p>
+    <button id="submit" class="login">Login</button>
+  </div>
 
-    <!-- ---------------------------- Validation Script --------------------------- -->
-    <script>
-      const username = document.getElementById("email");
-      const password = document.getElementById("password");
-      const success = document.getElementById("success");
-      const error = document.getElementById("error");
-      const div = document.getElementById("loginDiv");
+  <!-- ------------------------------- Error and Succes Popup -------------------------- -->
+  <div id="popup-success" class="popup">
+    <div class="popup-content">
+      <h2>Login Successful!</h2>
+      <p>Welcome to Investify 😊</p>
+      <button class="close" id="close-popup-success">OK</button>
+    </div>
+  </div>
+  <div id="popup-error" class="popup">
+    <div class="popup-content">
+      <span class="close" id="close-popup-error">&times;</span>
+      <h2>Login Failed</h2>
+      <p>Invalid email or password. Please try again.</p>
+    </div>
+  </div>
+  <div id="sent-email" class="popup">
+    <div class="popup-content">
+      <h2>Email Sent✅</h2>
+      <p>Check your email for password reset link</p>
+      <button class="close" id="close-sent">OK</button>
+    </div>
+  </div>
 
-      document.getElementById("submit").onclick = function () {
-        let valid = email.checkValidity() && password.checkValidity();
+  <!-- ---------------------------- Validation Script --------------------------- -->
+  <script>
+    const username = document.getElementById("email");
+    const password = document.getElementById("password");
+    const success = document.getElementById("success");
+    const error = document.getElementById("error");
+    const div = document.getElementById("loginDiv");
 
-        if (!valid) {
-          error.style.display = "block";
-          error.style.animation = "shake 0.5s 1";
-          password.setAttribute("aria-invalid", "true");
-          email.setAttribute("aria-invalid", "true");
-        } else {
-          error.style.display = "none";
-          div.style.display = "none";
-          success.style.display = "block";
-        }
-      };
+    document.getElementById("submit").onclick = function () {
+      let valid = email.checkValidity() && password.checkValidity();
 
-      username.addEventListener("keyup", function (event) {
-        let userValid = email.checkValidity();
-        let passValid = password.checkValidity();
+      if (!valid) {
+        error.style.display = "block";
+        error.style.animation = "shake 0.5s 1";
+        password.setAttribute("aria-invalid", "true");
+        email.setAttribute("aria-invalid", "true");
+      } else {
+        error.style.display = "none";
+        div.style.display = "none";
+        success.style.display = "block";
+      }
+    };
 
-        if (passValid) {
-          password.setAttribute("aria-invalid", "false");
-        }
-        if (userValid) {
-          email.setAttribute("aria-invalid", "false");
-        }
-      });
+    username.addEventListener("keyup", function (event) {
+      let userValid = email.checkValidity();
+      let passValid = password.checkValidity();
 
-      password.addEventListener("keyup", function (event) {
-        let passValid = password.checkValidity();
-        let userValid = email.checkValidity();
+      if (passValid) {
+        password.setAttribute("aria-invalid", "false");
+      }
+      if (userValid) {
+        email.setAttribute("aria-invalid", "false");
+      }
+    });
 
-        if (passValid) {
-          password.setAttribute("aria-invalid", "false");
-        }
-        if (userValid) {
-          email.setAttribute("aria-invalid", "false");
-        }
-      });
-    </script>
-  </body>
+    password.addEventListener("keyup", function (event) {
+      let passValid = password.checkValidity();
+      let userValid = email.checkValidity();
+
+      if (passValid) {
+        password.setAttribute("aria-invalid", "false");
+      }
+      if (userValid) {
+        email.setAttribute("aria-invalid", "false");
+      }
+    });
+  </script>
+</body>
+
 </html>
