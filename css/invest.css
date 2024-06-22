@@ -8,28 +8,35 @@
     font-weight: bold;
 }
 
-img i {
+/* Remove the light blue outline on mobile devices */
+* {
     outline: none;
     -webkit-tap-highlight-color: transparent;
 }
 
-*:focus {
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-i,
+/* If you want to target specific elements, use the following */
+a,
 img,
-a {
+button,
+input {
     outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.i:focus,
-img:focus,
-a:focus {
-    outline: none;
-    box-shadow: none;
-    /* For additional safety */
+/* Ensure it covers most mobile browsers */
+a,
+img,
+button,
+input {
+    outline: none !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    /* Safari */
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    /* Firefox */
+    -ms-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    /* Internet Explorer/Edge */
+    tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    /* Standard */
 }
 
 
@@ -641,11 +648,11 @@ form button:hover {
 
 .popup .close:hover,
 .close-popup:hover {
-  color: var(--pry-color);
-  background: #fff;
-  transition: 1s;
-  text-decoration: none;
-  cursor: pointer;
+    color: var(--pry-color);
+    background: #fff;
+    transition: 1s;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .confirm-button {

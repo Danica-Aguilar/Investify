@@ -85,3 +85,5 @@ document.getElementById('contact-form').addEventListener('submit', function (eve
   alert("Form submitted, we'll reach out as soon as possible."); // Displays the prompt
   this.reset();
 });
+
+

@@ -8,18 +8,39 @@
     font-weight: bold;
 }
 
-img i {
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-*:focus {
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
 a {
     text-decoration: none;
+}
+
+/* Remove the light blue outline on mobile devices */
+* {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* If you want to target specific elements, use the following */
+a,
+img,
+button,
+input {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure it covers most mobile browsers */
+a,
+img,
+button,
+input {
+    outline: none !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    /* Safari */
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    /* Firefox */
+    -ms-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    /* Internet Explorer/Edge */
+    tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    /* Standard */
 }
 
 :root {
