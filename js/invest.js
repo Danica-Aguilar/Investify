@@ -28,6 +28,12 @@ const logoutButton = document.getElementById("logoutButton");
 const confirmYes = document.getElementById("confirmYes");
 const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
+const progressBar = document.getElementById("progress-bar");
+
+// Function to update the progress bar
+function updateProgressBar(progress) {
+  progressBar.style.width = `${progress}%`;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   onAuthStateChanged(auth, (user) => {
@@ -50,9 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ============== Display user data from Realtime Db ============== //
 function displayUserData(uid) {
+  updateProgressBar(20);
   const dbRef = ref(database);
   get(child(dbRef, `users/${uid}`))
     .then((snapshot) => {
+      updateProgressBar(70);
       if (snapshot.exists()) {
         const userData = snapshot.val();
         const firstname = userData.firstname || " User ";
@@ -62,10 +70,15 @@ function displayUserData(uid) {
         userDataDiv.innerHTML = `
           <h3>👋Hello, ${firstname}!</h3>
         `;
+        updateProgressBar(100);
+        setTimeout(() => {
+          document.getElementById("progress-bar-container").style.display = 'none';
+        }, 500); // Hide progress bar
       }
     })
     .catch((error) => {
       console.error("Error retrieving user data: ", error);
+      updateProgressBar(0); // Reset progress bar on error
     });
 }
 
@@ -108,7 +121,7 @@ const closePopup = () => {
 document.querySelector(".close-popup").addEventListener("click", closePopup);
 
 // ============== Form Submission Check ============== //
-document.getElementById('investmentForm').addEventListener('submit', function(event) {
+document.getElementById('investmentForm').addEventListener('submit', function (event) {
   event.preventDefault(); // Prevent the form from submitting
 
   // Get selected package
@@ -124,14 +137,16 @@ document.getElementById('investmentForm').addEventListener('submit', function(ev
   // Fetch user balance from Firebase
   const user = auth.currentUser;
   if (user) {
+    updateProgressBar(20);
     const userId = user.uid;
     get(child(ref(database), `users/${userId}/balance`))
       .then((snapshot) => {
+        updateProgressBar(70);
         if (snapshot.exists()) {
           const balance = snapshot.val();
 
           if (balance < packageValue) {
-            showPopup('Insufficient balance❌,<br> kindly top up balance for this package.');
+            showPopup('Insufficient balance❌, kindly top up balance for this package.');
           } else {
             showPopup('Investment Plan activated✅');
             // Add additional logic here if needed (e.g., process the investment)
@@ -139,10 +154,15 @@ document.getElementById('investmentForm').addEventListener('submit', function(ev
         } else {
           showPopup('Balance information not found.');
         }
+        updateProgressBar(100);
+        setTimeout(() => {
+          document.getElementById("progress-bar-container").style.display = 'none';
+        }, 500); // Hide progress bar
       })
       .catch((error) => {
         console.error('Error fetching user balance:', error);
         showPopup('An error occurred. Please try again later.');
+        updateProgressBar(0); // Reset progress bar on error
       });
   } else {
     showPopup('User not authenticated.');

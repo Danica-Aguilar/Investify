@@ -629,10 +629,21 @@ button:hover {
 
 .popup .close,
 .close-popup {
-    position: absolute;
-    top: 5px;
-    right: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    width: 40px;
+    background: #41b938;
+    border: 1px solid var(--pry-color);
     cursor: pointer;
+}
+
+.popup .close:hover,
+.close-popup:hover {
+  color: black;
+  transition: 1s;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .confirm-button {
