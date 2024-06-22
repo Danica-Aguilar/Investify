@@ -309,13 +309,13 @@
       <h2>OUR NEWSLETTER📢</h2>
       <p>
         Get expert tips, market analysis, and the latest financial news
-        delivered straight to your inbox by subscribing yo our newsletter.
+        delivered straight to your inbox by subscribing to our newsletter.
         Join our community of savvy investors today and take the first
         step towards smarter investing!
       </p>
       <div class="signup">
         <h5></h5>
-        <form class="email-signup">
+        <form class="email-signup" id="emailSignupForm">
           <input type="email" placeholder="Email" required>
           <button type="submit">
             <h4>Send</h4> <i class="fa fa-angle-right"></i>
@@ -515,18 +515,18 @@
       <h1>CONTACT US☎️</h1>
       <div class="flex">
         <div id="form-container">
-          <form>
+          <form id="contact-form">
             <label for="name">Name</label>
-            <input type="text" id="name" />
+            <input type="text" id="name" required/>
 
             <label for="email">Email</label>
-            <input type="text" id="email" />
+            <input type="text" id="email" required/>
 
             <label for="subject">Subject</label>
-            <input type="text" id="subject" />
+            <input type="text" id="subject" required/>
 
             <label for="message">Message</label>
-            <textarea id="message" placeholder="Write your message here.."></textarea>
+            <textarea id="message" placeholder="Write your message here.." required></textarea>
 
             <button class="btn">
               Send <i class="fas fa-chevron-right"></i>

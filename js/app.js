@@ -1,20 +1,20 @@
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-btn');
-    const mobileMenu = document.querySelector('.main-menu');
-    const menuLinks = document.querySelectorAll('.menu-link');
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.querySelector('.menu-btn');
+  const mobileMenu = document.querySelector('.main-menu');
+  const menuLinks = document.querySelectorAll('.menu-link');
 
-    // Toggle the menu visibility
-    menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('show');
-    });
+  // Toggle the menu visibility
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
 
-    // Add click event listeners to menu links
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('show');
-        });
+  // Add click event listeners to menu links
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('show');
     });
+  });
 });
 
 
@@ -54,6 +54,8 @@ function seeLess() {
 }
 
 
+
+// ================ Clients Swiper fx ===============// 
 var swiper = new Swiper(".mySwiper", {
   slidesPerView: 1,
   grabCursor: true,
@@ -66,4 +68,20 @@ var swiper = new Swiper(".mySwiper", {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
+});
+
+
+
+// ================= newsletter =============== //
+document.getElementById('emailSignupForm').addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevents the default form submission
+  alert('Email submitted'); // Displays the prompt
+  this.reset();
+});
+
+
+document.getElementById('contact-form').addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevents the default form submission
+  alert("Form submitted, we'll reach out as soon as possible."); // Displays the prompt
+  this.reset();
 });
