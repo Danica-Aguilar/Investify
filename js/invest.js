@@ -102,6 +102,7 @@ const showPopup = (message) => {
 const closePopup = () => {
   const popup = document.getElementById("popup");
   popup.classList.remove("show");
+  window.location.href = "invest.html";
 };
 
 document.querySelector(".close-popup").addEventListener("click", closePopup);
@@ -118,7 +119,7 @@ document.getElementById('investmentForm').addEventListener('submit', function(ev
   }
 
   const packageElement = selectedPackage.closest('.packages');
-  const packageValue = parseFloat(packageElement.querySelector('.text1').textContent.replace(/[^\d.]/g, ''));
+  const packageValue = parseFloat(packageElement.querySelector('.text2').textContent.replace(/[^\d.]/g, ''));
 
   // Fetch user balance from Firebase
   const user = auth.currentUser;
@@ -130,9 +131,9 @@ document.getElementById('investmentForm').addEventListener('submit', function(ev
           const balance = snapshot.val();
 
           if (balance < packageValue) {
-            showPopup('Insufficient balance, kindly top up balance for this package.');
+            showPopup('Insufficient balance❌,<br> kindly top up balance for this package.');
           } else {
-            showPopup('Investment Plan activated');
+            showPopup('Investment Plan activated✅');
             // Add additional logic here if needed (e.g., process the investment)
           }
         } else {
