@@ -14,7 +14,13 @@ import {
     update,
     remove
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
-import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-functions.js";
+import {
+    getFunctions,
+    httpsCallable
+} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-functions.js";
+import {
+    getMessaging
+} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-messaging.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDosNrhPrcRC2UpOu9Wu3N2p3jaUwbJyDI",
@@ -29,6 +35,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
+const messaging = getMessaging(app);
 const functions = getFunctions(app);
 
 // DOM elements
@@ -259,4 +266,35 @@ function displayUserData(uid) {
         .catch((error) => {
             console.error("Error retrieving user data: ", error);
         });
+}
+
+
+
+
+//================ Push notification =======================//
+database.ref('users').on('child_added', (snapshot) => {
+    const newUser = snapshot.val();
+    const isAdmin = newUser.role === 'admin'; // Assuming you have a role property for users
+    if (isAdmin) {
+        sendNotificationToAdmin(newUser);
+    }
+});
+
+// Function to send notification to admin
+function sendNotificationToAdmin(user) {
+    // Get the FCM token of the admin (you'll need to store this somewhere)
+    const adminFCMToken = 'BBsjezC9ZvJ1tCPIN3TbsLJZvarHiIfP991i5giZJo4u89x3kim-z1-FTgT2oVdMoXuHpg4KtxmqqNFoPq4nvgo';
+
+    // Send a notification using the Firebase Cloud Messaging API
+    messaging.send({
+        token: adminFCMToken,
+        notification: {
+            title: 'New User Signed Up',
+            body: `${user.name} (${user.email}) signed up.`
+        }
+    }).then(() => {
+        console.log('Notification sent successfully');
+    }).catch((error) => {
+        console.error('Error sending notification:', error);
+    });
 }

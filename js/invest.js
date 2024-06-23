@@ -125,7 +125,7 @@ const closePopup = () => {
 document.querySelector(".close-popup").addEventListener("click", closePopup);
 
 // ============== Form Submission Check ============== //
-document.getElementById('investmentForm').addEventListener('submit', function(event) {
+document.getElementById('investmentForm').addEventListener('submit', function (event) {
   event.preventDefault(); // Prevent the form from submitting
 
   // Get selected package
