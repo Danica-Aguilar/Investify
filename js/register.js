@@ -69,7 +69,7 @@ const isValidUsername = (username) => {
 const checkUniqueFirstname = async (firstname) => {
   const dbRef = ref(getDatabase());
   try {
-    const snapshot = await get(child(dbRef, "users"));
+    const snapshot = await get(child(dbRef, 'users'));
     if (snapshot.exists()) {
       const users = snapshot.val();
       const lowerFirstname = firstname.toLowerCase();
@@ -89,7 +89,7 @@ const checkUniqueFirstname = async (firstname) => {
 const checkUniqueEmail = async (email) => {
   const dbRef = ref(getDatabase());
   try {
-    const snapshot = await get(child(dbRef, "users"));
+    const snapshot = await get(child(dbRef, 'users'));
     if (snapshot.exists()) {
       const users = snapshot.val();
       const lowerEmail = email.toLowerCase();
@@ -119,10 +119,7 @@ const validateInputs = async () => {
     setError(firstname, "Username is required");
     isValid = false;
   } else if (!isValidUsername(firstnameValue)) {
-    setError(
-      firstname,
-      "3-16 chars, begin with a letter. Contain: letters, numbers underscores and periods."
-    );
+    setError(firstname, "3-16 chars, begin with a letter. Contain: letters, numbers underscores and periods.");
     isValid = false;
   } else {
     const isUniqueFirstname = await checkUniqueFirstname(firstnameValue);
@@ -217,7 +214,7 @@ submit.addEventListener("click", async (event) => {
         const user = userCredential.user;
 
         // Store user data in Realtime Database
-        set(ref(database, "users/" + user.uid), {
+        set(ref(database, 'users/' + user.uid), {
           firstname: firstnameValue,
           lastname: lastnameValue,
           email: emailValue,
@@ -225,27 +222,22 @@ submit.addEventListener("click", async (event) => {
           balance: 0,
           investments: 0,
           deposits: 0,
-          referrals: 0,
-        })
-          .then(() => {
-            showPopup("Account Created Successfully.");
-            setTimeout(() => {
-              window.location.href = "login.html";
-            }, 5000);
-          })
-          .catch((error) => {
-            console.error("Error writing user data:", error);
-            showPopup("Error writing user data: " + error.message);
-          });
+          referrals: 0
+        }).then(() => {
+          showPopup(
+            "Account Created Successfully."
+          );
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 5000);
+        }).catch((error) => {
+          console.error("Error writing user data:", error);
+          showPopup("Error writing user data: " + error.message);
+        });
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
-        if (errorCode === "auth/email-already-in-use") {
-          setError(email, "Email already in use");
-        } else {
-          showPopup(errorMessage);
-        }
+        showPopup(errorMessage);
       });
   }
 });
