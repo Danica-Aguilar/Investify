@@ -7,8 +7,6 @@ import {
   getDatabase,
   ref,
   set,
-  get,
-  child,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 // Firebase configuration
@@ -151,7 +149,7 @@ const showError = (message) => {
 };
 
 const closePopup = () => {
-  window.location.href = "register.html"
+  window.location.href = "register.html";
 };
 
 // Attach the closePopup function to the close button
@@ -195,7 +193,7 @@ submit.addEventListener("click", async (event) => {
       })
       .catch((error) => {
         const errorMessage = error.message;
-        showError(errorMessage, "Sign in to continue");  
+        showError(errorMessage);  
       });
   }
 });

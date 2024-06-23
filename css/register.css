@@ -197,7 +197,16 @@ input {
 }
 
 /* --------------------------- Popup Prompt -------------------------- */
-#popup, #error-popup {
+.hidden {
+  display: none;
+}
+
+.popup.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -212,11 +221,6 @@ input {
   transition: visibility 0s, opacity 0.3s;
 }
 
-#popup.show, #error-popup.show {
-  visibility: visible;
-  opacity: 1;
-}
-
 .popup-content {
   background-color: var(--bg-color);
   padding: 20px;
@@ -228,7 +232,7 @@ input {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 90%;
+  width: 50%;
   box-sizing: border-box;
 }
 
@@ -242,14 +246,7 @@ input {
   font-weight: bold;
   font-size: 18px;
   margin: 0;
-}
-
-.close {
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #fff;
-  background: var(--pry-color);
+  margin-top: 1rem;
 }
 
 @media (max-width: 481px) {

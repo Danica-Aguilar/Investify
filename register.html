@@ -50,12 +50,12 @@
         <div class="error"></div>
       </div>
       <p>Already Have an account? <a href="login.html">Sign In</a></p>
-      <button type="submit" id="submit" onclick="save()">Register</button>
+      <button type="submit" id="submit">Register</button>
     </form>
   </div>
 
-  <!-- ---------------------------- Popup Prompt --------------------------- -->
-  <div id="popup" class="popup hidden">
+  <!-- Popup Prompt -->
+  <div id="popup" class="popup">
     <div class="popup-content">
       <img src="./img/checked.png" alt="">
       <span class="close" onclick="closePopup()"></span>
@@ -63,25 +63,15 @@
       <p>Redirecting to Login Page please wait...</p>
     </div>
   </div>
-  <div id="error-popup" class="popup hidden">
+  <div id="error-popup" class="popup">
     <div class="popup-content">
       <img src="./img/cancel.png" alt="">
       <p id="error-message"></p>
       <button class="close" onclick="closePopup()">OK</button>
     </div>
   </div>
+
+  <script type="module" src="./js/register.js" defer></script>
 </body>
-
-
-<!--
-const showError = (message) => {
-  popupMessage.textContent = message;
-  errorPopup.classList.add("show");
-};
-
-const errorPopup = document.getElementById("error-popup");
--->
-
-<script type="module" src="./js/register.js" defer></script>
 
 </html>
