@@ -8,7 +8,7 @@ import {
   getDatabase,
   ref,
   get,
-  child
+  child,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -16,7 +16,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDosNrhPrcRC2UpOu9Wu3N2p3jaUwbJyDI",
   authDomain: "login-example-c7c78.firebaseapp.com",
   projectId: "login-example-c7c78",
-  storageBucket: "login-example-c7c78",
+  storageBucket: "login-example-c7c78.appspot.com",
   messagingSenderId: "298272317823",
   appId: "1:298272317823:web:07b88844cd084699197a4a",
   databaseURL: "https://login-example-c7c78-default-rtdb.firebaseio.com",
@@ -54,13 +54,13 @@ submit.addEventListener("click", function (event) {
             setTimeout(() => {
               document.getElementById("popup-success").style.display = "none";
               window.location.href = "admin.html"; // Admin dashboard
-            }, 1000); // 1-second timeout
+            }, 500); // 1-second timeout
           } else {
             document.getElementById("popup-success").style.display = "block";
             setTimeout(() => {
               document.getElementById("popup-success").style.display = "none";
               window.location.href = "dashboard.html"; // User dashboard
-            }, 1000); // 1-second timeout
+            }, 500); // 1-second timeout
           }
         } else {
           console.error("No user data found");
@@ -72,14 +72,10 @@ submit.addEventListener("click", function (event) {
       });
     })
     .catch((error) => {
-      if (error.code === 'auth/user-not-found') {
-        showPopup("Email not found, kindly register to get started.");
-      } else {
-        showPopup("Error: " + error.message);
-      }
       document.getElementById("popup-error").style.display = "block";
       setTimeout(() => {
         document.getElementById("popup-error").style.display = "none";
+        window.location.href = "login.html"; // Redirect to login page
       }, 5000); // 5-seconds timeout
     });
 });
@@ -99,28 +95,23 @@ const showPopup = (message) => {
   document.getElementById("popup-error").style.display = "block";
 };
 
-const showReset = (message) => {
-  document.getElementById("sent-email").textContent = message;
-  document.getElementById("sent-email").style.display = "block";
-};
 
 const reset = document.getElementById("reset");
-reset.addEventListener("click", function (event) {
-  event.preventDefault();
+reset.addEventListener("click", function(event){
+  event.preventDefault()
 
-  const email = document.getElementById("email").value;
-  sendPasswordResetEmail(auth, email)
-    .then(() => {
-      // Password reset email sent!
-      document.getElementById("sent-email").style.display = "block";
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
-    });
+const email = document.getElementById("email").value;
 
-  document.getElementById("close-sent").addEventListener("click", function () {
-    document.getElementById("sent-email").style.display = "none";
+const auth = getAuth();
+sendPasswordResetEmail(auth, email)
+  .then(() => {
+    // Password reset email sent!
+    // ..
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
   });
-});
+
+})
