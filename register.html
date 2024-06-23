@@ -63,8 +63,24 @@
       <p>Redirecting to Login Page please wait...</p>
     </div>
   </div>
+  <div id="error-popup" class="popup hidden">
+    <div class="popup-content">
+      <img src="./img/cancel.png" alt="">
+      <p id="error-message"></p>
+      <button class="close" onclick="closePopup()">OK</button>
+    </div>
+  </div>
 </body>
 
+
+<!--
+const showError = (message) => {
+  popupMessage.textContent = message;
+  errorPopup.classList.add("show");
+};
+
+const errorPopup = document.getElementById("error-popup");
+-->
 
 <script type="module" src="./js/register.js" defer></script>
 

@@ -197,7 +197,7 @@ input {
 }
 
 /* --------------------------- Popup Prompt -------------------------- */
-#popup {
+#popup, #error-popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -212,7 +212,7 @@ input {
   transition: visibility 0s, opacity 0.3s;
 }
 
-#popup.show {
+#popup.show, #error-popup.show {
   visibility: visible;
   opacity: 1;
 }
@@ -245,16 +245,11 @@ input {
 }
 
 .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
-  color: #aaa;
-}
-
-.close:hover {
-  color: #333;
+  color: #fff;
+  background: var(--pry-color);
 }
 
 @media (max-width: 481px) {

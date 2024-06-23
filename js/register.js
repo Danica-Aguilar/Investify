@@ -36,7 +36,9 @@ const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
 const submit = document.getElementById("submit");
 const popup = document.getElementById("popup");
+const errorPopup = document.getElementById("error-popup");
 const popupMessage = document.getElementById("popup-message");
+const errorMessage = document.getElementById("error-message");
 
 // Form validation
 const setError = (element, message) => {
@@ -66,46 +68,6 @@ const isValidUsername = (username) => {
   return re.test(username);
 };
 
-const checkUniqueFirstname = async (firstname) => {
-  const dbRef = ref(getDatabase());
-  try {
-    const snapshot = await get(child(dbRef, 'users'));
-    if (snapshot.exists()) {
-      const users = snapshot.val();
-      const lowerFirstname = firstname.toLowerCase();
-      for (let userId in users) {
-        if (users[userId].firstname.toLowerCase() === lowerFirstname) {
-          return false;
-        }
-      }
-    }
-    return true;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};
-
-const checkUniqueEmail = async (email) => {
-  const dbRef = ref(getDatabase());
-  try {
-    const snapshot = await get(child(dbRef, 'users'));
-    if (snapshot.exists()) {
-      const users = snapshot.val();
-      const lowerEmail = email.toLowerCase();
-      for (let userId in users) {
-        if (users[userId].email.toLowerCase() === lowerEmail) {
-          return false;
-        }
-      }
-    }
-    return true;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};
-
 const validateInputs = async () => {
   const firstnameValue = firstname.value.trim();
   const lastnameValue = lastname.value.trim();
@@ -119,16 +81,13 @@ const validateInputs = async () => {
     setError(firstname, "Username is required");
     isValid = false;
   } else if (!isValidUsername(firstnameValue)) {
-    setError(firstname, "3-16 chars, begin with a letter. Contain: letters, numbers underscores and periods.");
+    setError(
+      firstname,
+      "3-16 chars, begin with a letter. Contain: letters, numbers underscores and periods."
+    );
     isValid = false;
   } else {
-    const isUniqueFirstname = await checkUniqueFirstname(firstnameValue);
-    if (!isUniqueFirstname) {
-      setError(firstname, "Username already taken");
-      isValid = false;
-    } else {
-      setSuccess(firstname);
-    }
+    setSuccess(firstname);
   }
 
   if (lastnameValue === "") {
@@ -145,13 +104,7 @@ const validateInputs = async () => {
     setError(email, "Provide a valid email address");
     isValid = false;
   } else {
-    const isUniqueEmail = await checkUniqueEmail(emailValue);
-    if (!isUniqueEmail) {
-      setError(email, "Email already in use");
-      isValid = false;
-    } else {
-      setSuccess(email);
-    }
+    setSuccess(email);
   }
 
   if (passwordValue === "") {
@@ -192,8 +145,13 @@ const showPopup = (message) => {
   popup.classList.add("show");
 };
 
+const showError = (message) => {
+  errorMessage.textContent = message;
+  errorPopup.classList.add("show");
+};
+
 const closePopup = () => {
-  popup.classList.remove("show");
+  window.location.href = "register.html"
 };
 
 // Attach the closePopup function to the close button
@@ -214,7 +172,7 @@ submit.addEventListener("click", async (event) => {
         const user = userCredential.user;
 
         // Store user data in Realtime Database
-        set(ref(database, 'users/' + user.uid), {
+        set(ref(database, "users/" + user.uid), {
           firstname: firstnameValue,
           lastname: lastnameValue,
           email: emailValue,
@@ -222,22 +180,22 @@ submit.addEventListener("click", async (event) => {
           balance: 0,
           investments: 0,
           deposits: 0,
-          referrals: 0
-        }).then(() => {
-          showPopup(
-            "Account Created Successfully."
-          );
-          setTimeout(() => {
-            window.location.href = "login.html";
-          }, 5000);
-        }).catch((error) => {
-          console.error("Error writing user data:", error);
-          showPopup("Error writing user data: " + error.message);
-        });
+          referrals: 0,
+        })
+          .then(() => {
+            showPopup("Account Created Successfully.");
+            setTimeout(() => {
+              window.location.href = "login.html";
+            }, 5000);
+          })
+          .catch((error) => {
+            console.error("Error writing user data:", error);
+            showPopup("Error writing user data: " + error.message);
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;
-        showPopup(errorMessage);
+        showError(errorMessage, "Sign in to continue");  
       });
   }
 });
