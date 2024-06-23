@@ -11,7 +11,7 @@ import {
   ref,
   get,
   child,
-  set,
+  update,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
@@ -128,8 +128,8 @@ form.addEventListener("submit", async (e) => {
   const postalCodeValue = postalCode.value.trim();
   const phoneValue = phone.value.trim();
 
-  // Store user data in Realtime Database
-  set(ref(database, "users/" + user.uid), {
+  // Update user data in Realtime Database
+  update(ref(database, "users/" + user.uid), {
     country: countryValue,
     full_address: fullAddressValue,
     state: stateValue,
