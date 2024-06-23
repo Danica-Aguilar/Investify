@@ -584,6 +584,11 @@ form {
     }
 }
 
+.price {
+    display: flex;flex-direction: row;
+    align-items: center;
+}
+
 form button {
     position: relative;
     padding: 10px;
