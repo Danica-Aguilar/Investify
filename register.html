@@ -14,17 +14,12 @@
 </head>
 
 <body>
-  <!-- ================= Loading =============== -->
-  <div id="progress-bar-container">
-    <div id="progress-bar"></div>
-  </div>
-
   <div class="container">
     <form id="form" action="/">
-      <a href="index.html" class="logo-wrapper">
+      <div class="logo-wrapper">
         <img class="logo-img" src="./img/logo.png" loading="lazy" alt="Investify" />
         <h3>INVESTIFY</h3>
-      </a>
+      </div>
       <div class="input-control">
         <label for="firstname">Username</label>
         <input id="firstname" name="firstname" type="text" />
@@ -50,10 +45,6 @@
         <input id="password2" name="password2" type="password" />
         <div class="error"></div>
       </div>
-      <div class="input-control">
-        <label for="referral">Referral code(optional)</label>
-        <input id="referral" name="referral" type="text" />
-      </div>
       <p>Already Have an account? <a href="login.html">Sign In</a></p>
       <button type="submit" id="submit" onclick="save()">Register</button>
     </form>
@@ -62,12 +53,16 @@
   <!-- ---------------------------- Popup Prompt --------------------------- -->
   <div id="popup" class="popup hidden">
     <div class="popup-content">
-      <span class="close" onclick="closePopup()">&times;</span>
+      <img src="./img/checked.png" alt="">
+      <span class="close" onclick="closePopup()"></span>
       <p id="popup-message"></p>
+      <p>Redirecting to Login Page please wait...</p>
     </div>
   </div>
 </body>
 
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
 <script type="module" src="./js/register.js" defer></script>

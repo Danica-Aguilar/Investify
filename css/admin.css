@@ -499,12 +499,12 @@ button {
 }
 
 #confirmYes {
-    background-color: #28a745;
+    background-color: #dc3545;
     color: white;
 }
 
 #confirmNo {
-    background-color: #dc3545;
+    background-color: #28a745;
     color: white;
 }
 

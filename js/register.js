@@ -225,11 +225,11 @@ submit.addEventListener("click", async (event) => {
           referrals: 0
         }).then(() => {
           showPopup(
-            "Account Created Successfully 😁. Redirecting to Login Page..."
+            "Account Created Successfully."
           );
           setTimeout(() => {
             window.location.href = "login.html";
-          }, 2000);
+          }, 5000);
         }).catch((error) => {
           console.error("Error writing user data:", error);
           showPopup("Error writing user data: " + error.message);

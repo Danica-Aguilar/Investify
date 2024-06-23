@@ -54,13 +54,13 @@ submit.addEventListener("click", function (event) {
             setTimeout(() => {
               document.getElementById("popup-success").style.display = "none";
               window.location.href = "admin.html"; // Admin dashboard
-            }, 500); // 1-second timeout
+            }, 5000); // 1-second timeout
           } else {
             document.getElementById("popup-success").style.display = "block";
             setTimeout(() => {
               document.getElementById("popup-success").style.display = "none";
               window.location.href = "dashboard.html"; // User dashboard
-            }, 500); // 1-second timeout
+            }, 5000); // 1-second timeout
           }
         } else {
           console.error("No user data found");
