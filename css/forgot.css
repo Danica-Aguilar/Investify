@@ -183,6 +183,7 @@ input[type="email"]:autofill {
   background-color: #385e35;
   transition: all 0.1s;
   box-shadow: 0 0 10px -7px #2d5c29;
+  color: var(--bg-color);
 }
 
 h1 {
@@ -223,24 +224,8 @@ label {
   color: #4a7d47;
 }
 
-#email:valid~.error {
-  display: none;
-}
-
 .inputField {
   height: 60px;
-}
-
-.error {
-  display: none;
-  width: 80%;
-  margin: auto;
-  color: red;
-  margin-top: -20px;
-}
-
-input[aria-invalid="true"] {
-  border-bottom: 2px solid red;
 }
 
 /* Your existing CSS styles */
@@ -274,18 +259,15 @@ input[aria-invalid="true"] {
   color: rgb(95, 158, 0);
 }
 
-#popup-error h2 {
-  color: red;
-}
-
 .close {
   color: #fff;
   font-size: 14px;
   font-weight: bold;
   background: var(--pry-color);
   border: 1px solid var(--pry-color);
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 

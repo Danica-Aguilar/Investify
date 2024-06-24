@@ -88,13 +88,19 @@
 
             sendPasswordResetEmail(auth, email)
                 .then(() => {
-                    alert("Password reset email sent!");
+                    document.getElementById("sent-email").style.display = "flex";
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
                     alert(`Error: ${errorMessage}`);
                 });
         });
+
+        document
+            .getElementById("close-sent")
+            .addEventListener("click", function () {
+                document.getElementById("sent-email").style.display = "none";
+            });
     </script>
 </body>
 

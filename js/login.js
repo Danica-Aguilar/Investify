@@ -2,8 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
   getAuth,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
+  signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 import {
   getDatabase,
@@ -104,25 +103,3 @@ const showPopup = (message) => {
   document.getElementById("popup-error").textContent = message;
   document.getElementById("popup-error").style.display = "block";
 };
-
-// Password reset handler
-const reset = document.getElementById("reset");
-reset.addEventListener("click", function (event) {
-  event.preventDefault();
-
-  const email = document.getElementById("email").value.trim();
-
-  if (!email) {
-    alert("Please enter a valid email address.");
-    return;
-  }
-
-  sendPasswordResetEmail(auth, email)
-    .then(() => {
-      alert("Password reset email sent!");
-    })
-    .catch((error) => {
-      const errorMessage = error.message;
-      alert(`Error: ${errorMessage}`);
-    });
-});
