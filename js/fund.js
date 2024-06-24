@@ -14,12 +14,8 @@ import {
   set
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
-
-require('dotenv').config(); // Load environment variables from .env file
-
-
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
+  apiKey: "AIzaSyDosNrhPrcRC2UpOu9Wu3N2p3jaUwbJyDI",
   authDomain: "login-example-c7c78.firebaseapp.com",
   projectId: "login-example-c7c78",
   storageBucket: "login-example-c7c78.appspot.com",
@@ -27,17 +23,6 @@ const firebaseConfig = {
   appId: "1:298272317823:web:07b88844cd084699197a4a",
   databaseURL: "https://login-example-c7c78-default-rtdb.firebaseio.com",
 };
-
-const apiKey = process.env.API_KEY;
-
-if (!apiKey) {
-  console.error('API_KEY not found in environment variables');
-  process.exit(1);
-}
-
-// Use your API key here
-console.log('API_KEY:', apiKey);
-
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
