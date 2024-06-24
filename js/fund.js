@@ -150,7 +150,7 @@ function updateFundAmount(uid) {
         });
       } else {
         document.querySelectorAll('#re-fund-amount').forEach(element => {
-          element.textContent = "No deposited amount found.";
+          element.textContent = "-";
         });
       }
     })

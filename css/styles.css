@@ -861,7 +861,6 @@ nav div button:hover:nth-child(2) {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  flex-wrap: nowrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
   overflow: hidden;
@@ -880,9 +879,11 @@ nav div button:hover:nth-child(2) {
   font-style: normal;
 }
 
-#address-container a {
+#address-container .overflow {
   text-decoration: none;
   color: var(--pry-color);
+  overflow-x: scroll;
+  scrollbar-width: thin;
 }
 
 #address-container a:hover {
