@@ -1,14 +1,14 @@
+// Import Firebase libraries
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
   getAuth,
   signInWithEmailAndPassword,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 import {
   getDatabase,
   ref,
   get,
-  child,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -44,50 +44,60 @@ submit.addEventListener("click", function (event) {
       const user = userCredential.user;
 
       // Get the user's role from the database
-      get(ref(database, 'users/' + user.uid)).then((snapshot) => {
-        if (snapshot.exists()) {
-          const userData = snapshot.val();
-          const userRole = userData.role;
+      get(ref(database, "users/" + user.uid))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+            const userRole = userData.role;
 
-          if (userRole === 'admin') {
-            document.getElementById("popup-success").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("popup-success").style.display = "none";
-              window.location.href = "admin.html"; // Admin dashboard
-            }, 5000); // 1-second timeout
+            if (userRole === "admin") {
+              document.getElementById("popup-success").style.display = "block";
+              setTimeout(() => {
+                document.getElementById("popup-success").style.display = "none";
+                window.location.href = "admin.html"; // Admin dashboard
+              }, 1000); // 1-second timeout
+            } else {
+              document.getElementById("popup-success").style.display = "block";
+              setTimeout(() => {
+                document.getElementById("popup-success").style.display = "none";
+                window.location.href = "dashboard.html"; // User dashboard
+              }, 1000); // 1-second timeout
+            }
           } else {
-            document.getElementById("popup-success").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("popup-success").style.display = "none";
-              window.location.href = "dashboard.html"; // User dashboard
-            }, 5000); // 1-second timeout
+            console.error("No user data found");
+            showPopup("Error: No user data found.");
           }
-        } else {
-          console.error("No user data found");
-          showPopup("Error: No user data found.");
-        }
-      }).catch((error) => {
-        console.error("Error fetching user data:", error);
-        showPopup("Error fetching user data: " + error.message);
-      });
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+          showPopup("Error fetching user data: " + error.message);
+        });
     })
     .catch((error) => {
-      document.getElementById("popup-error").style.display = "block";
-      setTimeout(() => {
-        document.getElementById("popup-error").style.display = "none";
-        window.location.href = "login.html"; // Redirect to login page
-      }, 5000); // 5-seconds timeout
+      if (error.code === "auth/network-request-failed") {
+        alert("Network connection interrupted");
+      } else {
+        document.getElementById("popup-error").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("popup-error").style.display = "none";
+          window.location.href = "login.html"; // Redirect to login page
+        }, 2000); // 2-second timeout
+      }
     });
 });
 
-document.getElementById("close-popup-success").addEventListener("click", function () {
-  document.getElementById("popup-success").style.display = "none";
-});
+document
+  .getElementById("close-popup-success")
+  .addEventListener("click", function () {
+    document.getElementById("popup-success").style.display = "none";
+  });
 
-document.getElementById("close-popup-error").addEventListener("click", function () {
-  document.getElementById("popup-error").style.display = "none";
-  window.location.href = "login.html"; // Redirect to login page
-});
+document
+  .getElementById("close-popup-error")
+  .addEventListener("click", function () {
+    document.getElementById("popup-error").style.display = "none";
+    window.location.href = "login.html"; // Redirect to login page
+  });
 
 // Popup functions
 const showPopup = (message) => {
@@ -95,23 +105,24 @@ const showPopup = (message) => {
   document.getElementById("popup-error").style.display = "block";
 };
 
-
+// Password reset handler
 const reset = document.getElementById("reset");
-reset.addEventListener("click", function(event){
-  event.preventDefault()
+reset.addEventListener("click", function (event) {
+  event.preventDefault();
 
-const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.trim();
 
-const auth = getAuth();
-sendPasswordResetEmail(auth, email)
-  .then(() => {
-    // Password reset email sent!
-    // ..
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
+  if (!email) {
+    alert("Please enter a valid email address.");
+    return;
+  }
 
-})
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      alert("Password reset email sent!");
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      alert(`Error: ${errorMessage}`);
+    });
+});

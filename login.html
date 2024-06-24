@@ -16,7 +16,7 @@
     <div id="progress-bar"></div>
   </div>
 
-  <div class="loginDiv" id="loginDiv">
+  <form class="loginDiv" id="loginDiv">
     <a href="index.html" class="logo-wrapper">
       <img class="logo-img" src="./img/logo.png" loading="lazy" alt="Investify" />
       <h3>INVESTIFY</h3>
@@ -32,12 +32,12 @@
     <div class="error" aria-errormessage="Invalid email or password." id="error">
       <p>You have entered an invalid email or password.</p>
     </div>
-    <p class="reset-already"><a href="#" id="reset">Forgot Password?</a></p>
+    <p class="reset-already"><a href="forgot.html">Forgot Password?</a></p>
     <p class="reset-already-two">Don't have an account? <a href="register.html">Register</a></p>
     <button id="submit" class="login">Login</button>
-  </div>
+  </form>
 
-  <!-- ------------------------------- Error and Succes Popup -------------------------- -->
+  <!-- ------------------------------- Error and Success Popup -------------------------- -->
   <div id="popup-success" class="popup">
     <div class="popup-content">
       <img src="./img/checked.png" alt="">
@@ -50,7 +50,7 @@
       <img src="./img/cancel.png" alt="">
       <h2>Login Failed</h2>
       <p>Invalid email or password. Please try again.</p>
-      <button class="close" id="close-popup-success">OK</button>
+      <button class="close" id="close-popup-error">OK</button>
     </div>
   </div>
   <div id="sent-email" class="popup">
