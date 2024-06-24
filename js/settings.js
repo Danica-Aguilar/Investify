@@ -1,5 +1,3 @@
-// Initialize Firebase (make sure this is done before using Firebase)
-// Replace the config object with your Firebase project's config
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
   getAuth,
@@ -14,6 +12,12 @@ import {
   update,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDosNrhPrcRC2UpOu9Wu3N2p3jaUwbJyDI",
@@ -28,17 +32,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
-const logoutButton = document.getElementById("logoutButton");
-const confirmYes = document.getElementById("confirmYes");
-const confirmNo = document.getElementById("confirmNo");
-const confirmationPopup = document.getElementById("confirmationPopup");
-const fullAddress = document.getElementById("full-address");
-const city = document.getElementById("city");
-const state = document.getElementById("state");
-const country = document.getElementById("country");
-const postalCode = document.getElementById("postal-code");
-const phone = document.getElementById("phone");
-const form = document.getElementById("profile-form");
+const storage = getStorage(app);
 
 document.addEventListener("DOMContentLoaded", function () {
   onAuthStateChanged(auth, (user) => {
@@ -112,6 +106,7 @@ function updateProfileName(uid) {
 }
 
 // ============ Profile settings update ============ //
+const form = document.getElementById("profile-form");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const user = auth.currentUser;
@@ -121,32 +116,78 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  const countryValue = country.value.trim();
-  const fullAddressValue = fullAddress.value.trim();
-  const stateValue = state.value.trim();
-  const cityValue = city.value.trim();
-  const postalCodeValue = postalCode.value.trim();
-  const phoneValue = phone.value.trim();
+  const countryValue = document.getElementById("country").value.trim();
+  const fullAddressValue = document.getElementById("full-address").value.trim();
+  const stateValue = document.getElementById("state").value.trim();
+  const cityValue = document.getElementById("city").value.trim();
+  const postalCodeValue = document.getElementById("postal-code").value.trim();
+  const phoneValue = document.getElementById("phone").value.trim();
 
-  // Update user data in Realtime Database
-  update(ref(database, "users/" + user.uid), {
-    country: countryValue,
-    full_address: fullAddressValue,
-    state: stateValue,
-    city: cityValue,
-    postal_code: postalCodeValue,
-    phone: phoneValue,
-  })
-    .then(() => {
-      alert("Profile data updated successfully.");
-      setTimeout(() => {
-        window.location.href = "settings.html";
-      }, 3000);
+  const file = document.getElementById("fileInput").files[0];
+  if (file) {
+    const storageReference = storageRef(
+      storage,
+      `verificationDoc/${user.uid}/${file.name}`
+    );
+    const uploadTask = uploadBytesResumable(storageReference, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+      },
+      (error) => {
+        console.error("Error uploading file:", error);
+        alert("Error uploading file: " + error.message);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          update(ref(database, "users/" + user.uid), {
+            country: countryValue,
+            full_address: fullAddressValue,
+            state: stateValue,
+            city: cityValue,
+            postal_code: postalCodeValue,
+            phone: phoneValue,
+            verification_doc_url: downloadURL,
+          })
+            .then(() => {
+              alert("Profile data updated successfully.");
+              console.log("Profile data updated successfully.");
+              setTimeout(() => {
+                window.location.href = "settings.html";
+              }, 3000);
+            })
+            .catch((error) => {
+              console.error("Error writing user data:", error);
+              alert("Error writing user data: " + error.message);
+            });
+        });
+      }
+    );
+  } else {
+    update(ref(database, "users/" + user.uid), {
+      country: countryValue,
+      full_address: fullAddressValue,
+      state: stateValue,
+      city: cityValue,
+      postal_code: postalCodeValue,
+      phone: phoneValue,
     })
-    .catch((error) => {
-      console.error("Error writing user data:", error);
-      alert("Error writing user data: " + error.message);
-    });
+      .then(() => {
+        alert("Profile data updated successfully.");
+        console.log("Profile data updated successfully.");
+        setTimeout(() => {
+          window.location.href = "settings.html";
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error("Error writing user data:", error);
+        alert("Error writing user data: " + error.message);
+      });
+  }
 });
 
 // ============== Logout Fx ================ //

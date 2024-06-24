@@ -193,7 +193,10 @@ submit.addEventListener("click", async (event) => {
       })
       .catch((error) => {
         const errorMessage = error.message;
-        showError(errorMessage);  
+        showError(errorMessage);
+        setTimeout(() => {
+          window.location.href = "register.html";
+        }, 3000);
       });
   }
 });

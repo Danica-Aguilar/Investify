@@ -79,11 +79,11 @@ document.getElementById('emailSignupForm').addEventListener('submit', function (
   this.reset();
 });
 
-
+/*
 document.getElementById('contact-form').addEventListener('submit', function (event) {
   event.preventDefault(); // Prevents the default form submission
   alert("Form submitted, we'll reach out as soon as possible."); // Displays the prompt
   this.reset();
 });
 
-
+*/

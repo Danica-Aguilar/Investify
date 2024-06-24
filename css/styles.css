@@ -956,6 +956,19 @@ footer .footer-about {
   color: #777;
 }
 
+footer .footer-about li {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+footer .footer-about li a img {
+  width: 30px;
+  height: 30px;
+}
+
 .foot-logo-wrapper {
   display: flex;
   flex-direction: row;

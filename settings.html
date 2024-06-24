@@ -15,10 +15,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <!-- ======== Script ======= -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js"></script>
     <script type="module" src="./js/settings.js"></script>
 </head>
 
@@ -43,61 +43,42 @@
                         </span>
                     </a>
                 </li>
-
                 <li>
                     <a href="dashboard.html">
-                        <span class="icon">
-                            🏠
-                        </span>
+                        <span class="icon">🏠</span>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="fund.html">
-                        <span class="icon">
-                            💰
-                        </span>
+                        <span class="icon">💰</span>
                         <span class="title">Fund Wallet</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="invest.html">
-                        <span class="icon">
-                            📈
-                        </span>
+                        <span class="icon">📈</span>
                         <span class="title">Invest</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="withdraw.html">
-                        <span class="icon">
-                            🏛️
-                        </span>
+                        <span class="icon">🏛️</span>
                         <span class="title">Withdrawal</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="refer.html">
-                        <span class="icon">
-                            👨‍👦‍👦
-                        </span>
-                        <span class="title">Refferals</span>
+                        <span class="icon">👨‍👦‍👦</span>
+                        <span class="title">Referrals</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="settings.html">
-                        <span class="icon">
-                            ⚙️
-                        </span>
+                        <span class="icon">⚙️</span>
                         <span class="title">Profile</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="#" id="logoutButton">
                         <span class="icon">
@@ -116,17 +97,13 @@
                 <div class="toggle">
                     <img src="./img/menu.png" alt="">
                 </div>
-
                 <div class="logo">
                     <span class="user-info">
                         <h2 id="welcomeMessage"></h2>
                     </span>
                 </div>
-
                 <div class="settings">
-                    <a href="settings.html">
-                        ⚙️
-                    </a>
+                    <a href="settings.html">⚙️</a>
                 </div>
             </div>
 
@@ -134,7 +111,7 @@
             <p class="settings-description">
                 CLIENTS VERIFICATION FORM <br>
                 Dear Investor, Kindly use the form below to update your
-                information. <br>
+                information, to receive exclusive benefits. <br>
                 NOTE: We do not share our investors or clients data with any
                 third party. Your personal details are safe with us.
             </p>
@@ -192,7 +169,7 @@
                         <label>Address</label>
                         <input type="text" id="full-address" placeholder="Enter full address" required />
                         <div class="column">
-                            <input type="text"  id="city" placeholder="Enter your city" required />
+                            <input type="text" id="city" placeholder="Enter your city" required />
                             <input type="text" id="state" placeholder="Enter your state" required />
                         </div>
                         <div class="column">

@@ -326,7 +326,7 @@
     </div>
   </section>
 
-  
+
   <div class="ease-link" id="testimonial"></div>
   <!-- ---------------------- Customer Feedback ------------------------ -->
   <h1 class="feedback-header">WHAT OUR CLIENTS SAY🗣</h1>
@@ -517,35 +517,35 @@
       <h1>CONTACT US☎️</h1>
       <div class="flex">
         <div id="form-container">
-          <form id="contact-form">
+          <form id="contact-form" action="https://formspree.io/f/mrbzzlqv" method="POST">
+            <!-- Hidden field to enable the honeypot feature -->
+            <input type="hidden" name="_captcha" value="false">
+
             <label for="name">Name</label>
-            <input type="text" id="name" required/>
+            <input type="text" id="name" name="name" required />
 
             <label for="email">Email</label>
-            <input type="text" id="email" required/>
+            <input type="email" id="email" name="email" required />
 
             <label for="subject">Subject</label>
-            <input type="text" id="subject" required/>
+            <input type="text" id="subject" name="subject" required />
 
             <label for="message">Message</label>
-            <textarea id="message" placeholder="Write your message here.." required></textarea>
+            <textarea id="message" name="message" placeholder="Write your message here.." required></textarea>
 
-            <button class="btn">
+            <button class="btn" type="submit">
               Send <i class="fas fa-chevron-right"></i>
             </button>
           </form>
+
         </div>
         <div id="address-container">
           <div class="flex">
             🎯
             <address>
-              20377 Evergreen Terrace Mountain View,
-              California, USA
+              C11 C11 Generator Hall Electric Wharf, Sandy Lane,
+              Coventry, West Midlands, England, CV1 4JL
             </address>
-          </div>
-          <div class="flex">
-            ☎️
-            <a href="#">232-232-2323</a>
           </div>
           <div class="flex">
             📧
@@ -574,6 +574,11 @@
           forex market and the direction of cryptocurrency
           advancement.
         </p>
+        <li>
+          <a href="#"><img src="./img/facebook.png" alt=""></a>
+          <a href="#"><img src="./img/whatsapp.png" alt=""></a>
+          <a href="#"><img src="./img/in.png" alt=""></a>
+        </li>
       </div>
       <div class="footer-quick-links">
         <h5>QUICK LINKS</h5>
@@ -597,7 +602,7 @@
       </div>
     </div>
     <small>
-      copyright &copy; 2011 - 2024 Investify Traders Limited. All rights reserved
+      copyright &copy; 2014 - 2024 Investify Traders Limited. All rights reserved
     </small>
   </footer>
 
