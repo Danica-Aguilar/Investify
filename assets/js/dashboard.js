@@ -79,7 +79,7 @@ function displayUserData(uid) {
         const investmentsElement = document.getElementById("investments");
         investmentsElement.innerHTML = `
         <div id="investments">
-            <div class="numbers">${investments}</div>
+            <div class="numbers">$${investments}.00</div>
             <div class="cardName">Investments</div>
           </div>
         `;
@@ -87,7 +87,7 @@ function displayUserData(uid) {
         const depositsElement = document.getElementById("deposits");
         depositsElement.innerHTML = `
           <div id="balance">
-            <div class="numbers">${deposits}</div>
+            <div class="numbers">$${deposits}.00</div>
             <div class="cardName">Deposits</div>
           </div>
         `;
